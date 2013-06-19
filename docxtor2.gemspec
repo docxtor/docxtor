@@ -7,10 +7,10 @@ Gem::Specification.new do |spec|
   spec.name          = "docxtor2"
   spec.version       = Docxtor2::VERSION
   spec.authors       = ["Vasiliy Yorkin"]
-  spec.email         = ["vyorkin@undev.ru"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.email         = ["vasiliy.yorin@gmail.com"]
+  spec.description   = %q{Prawn-like ruby docx generator, provides its own DSL to simplify things}
+  spec.summary       = %q{Ruby docx generator}
+  spec.homepage      = "http://github.com/vyorkin/docxtor2"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
