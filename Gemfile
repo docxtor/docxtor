@@ -7,8 +7,8 @@ group :test, :development do
 end
 
 group :test do
-  gem 'coveralls', require: false
-  gem 'simplecov', require: false
+  gem 'coveralls', :require => false
+  gem 'simplecov', :require => false
   gem 'tconsole'
   gem 'turn'
 end

@@ -1,6 +1,7 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'docxtor2'
 
-if ENV[:test]
+if ENV[:TRAVIS]
+  require 'coveralls'
   Coveralls.wear!
 end
