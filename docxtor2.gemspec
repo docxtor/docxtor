@@ -22,7 +22,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
 
+  # TODO: nokogiri version should be conditional & 
+  # perhaps depend on current ruby version
   spec.add_runtime_dependency "nokogiri", "~> 1.4.0"
+  
   spec.add_runtime_dependency "builder"
   spec.add_runtime_dependency "rubytree"
   spec.add_runtime_dependency "rubyzip"
