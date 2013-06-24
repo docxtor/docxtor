@@ -1,5 +1,5 @@
 require "docxtor2/version"
 
 module Docxtor2
-  # Your code goes here...
+  autoload :Docxtor, 'docxtor2/docxtor'
 end
