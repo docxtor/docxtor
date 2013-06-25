@@ -1,4 +1,5 @@
 module Docxtor2
-  class Docxtor
+  module Model
+    
   end
 end
