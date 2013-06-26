@@ -10,38 +10,6 @@ xml.w :document, "xmlns:ve" => "http://schemas.openxmlformats.org/markup-compati
                  "xmlns:w" => "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
                  "xmlns:wne" => "http://schemas.microsoft.com/office/word/2006/wordml" do |xml|
   xml.w :body do |xml|
-    
-    xml.w :sdt, "xmlns:w" => "http://schemas.openxmlformats.org/wordprocessingml/2006/main" do |xml|
-
-      xml.w :sdtPr do |xml|
-        xml.w :id, "w:val" => "1676794842"
-        xml.w :docPartObj do |xml|
-          xml.w :docPartGallery, "w:val" => "Table of Contents"
-          xml.w :docPartUnique
-        end
-      end
-
-      xml.w :sdtContent do |xml|
-        xml.w :p do |xml|
-          xml.w :pPr do |xml|
-            xml.w :pStyle, "w:val" => "TOCHeading"
-          end
-          xml.w :r do |xml|
-            xml.w :t do |xml|
-              xml.text! "Contents"
-            end
-          end
-        end
-      end
-
-    end
-
-    @root.children.each {|element| place element, xml}
-
-    xml.w :sectPr do |xml|
-      page_options.headers_footers.each do |hf|
-        xml.w hf.reference_name, "r:id" => hf.reference_id, "w:type" => "#{hf.pages}"
-      end if page_options && page_options.headers_footers
-    end
+    content
   end
 end

@@ -1,51 +1,57 @@
+require "builder"
+
 module Docxtor2
   class Builder
     class << self
-      def build(template, &block)
-        instance = new(template, block)
-        instance.document
+      def build(document, &block)
+        # TODO: Add assert that document.is_dynamic
+
+        instance = new(document, block)
+        instance.result
       end
     end
 
-    def initialize(template, block)
-      @template = template
-      @config = { :h1 => {}, :h2 => {}, :p => {} }
-      instance_eval &block
-    end
-
-    def document
-      @parts = TemplateParser.parse(@template)
-      @document = Document.new(@parts)
+    def initialize(document, block)
+      @document = document
       
-      apply
+      @result = ''
+      @content = ''
 
-      @document
+      @x = ::Builder::XmlMarkup.new(
+        :target => @content, 
+        :indent => 2
+      )
+
+      instance_eval &block
+      
+      # TODO: Find a better way to use eval with binding
+      content = @content
+      
+      # TODO: Continue here!
+      xml = ::Builder::XmlMarkup.new(
+        :target => @result, 
+        :indent => 2
+      )
+
+      @result = eval(@document.content)
     end
 
-    # 1. Хуня собирает дслем инфу че впихать куда
-    # 2. Разбирает директорию с шаблон и вхуячивает описанное дслем куда надо
-    # 3. Возвращает хэш (Document) генератору и он зипует
-
-    def toc!
-      table_of_contents!
+    def result
+      @result
     end
 
-    def table_of_contents!
-    end
-
-    def h1(title)
-    end
-
-    def h2(title)
+    def render
+      @content
     end
 
     def p(content)
-    end
-
-    private
-
-    def apply
-      
+      @x.w :p do 
+        @x.w :r do
+          @x.w :t do 
+            @x.text! content
+          end
+        end
+      end
     end
   end
 end

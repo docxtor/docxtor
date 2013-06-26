@@ -16,7 +16,7 @@ module Docxtor2
       end
 
       def remove(child)
-        @children.delete child
+        @children.delete(child)
         self
       end
     end

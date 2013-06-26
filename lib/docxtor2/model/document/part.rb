@@ -4,7 +4,7 @@ module Docxtor2
       attr_reader :filepath, :content, :is_dynamic
 
       def initialize(filepath, content)
-        @filepath = filepath.gsub(configus.builder_ext, '')
+        @filepath = filepath
         @is_dynamic = self.class.is_dynamic?(@filepath)
 
         @content = content

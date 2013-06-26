@@ -3,7 +3,6 @@ module Docxtor2
 
     class << self
       def generate(filepath, document)
-        p "filepath is #{filepath}"
         # HINT: To make test pass
         stub_file = File.new(filepath, "w")
         stub_file.puts("stub")

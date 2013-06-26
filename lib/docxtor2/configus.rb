@@ -5,7 +5,11 @@ require 'configus'
 
 Configus.build :default do
   env :default do
-    builder_ext 'xml.builder'
-    search_pattern File.join('**', '*.{xml, #{builder_ext}}')
+    builder_ext '.xml.builder'
+    search_pattern File.join('**', '*.{xml,builder}')
+
+    templates do
+      default File.join('../../../templates/minimal')
+    end
   end
 end

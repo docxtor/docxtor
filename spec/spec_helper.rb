@@ -3,7 +3,7 @@ if ENV["COVERAGE"]
   SimpleCov.start
 end
 
-require 'configus'
+require 'rspec-xml'
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'docxtor2'
 

@@ -1,9 +1,7 @@
 module Docxtor2
-  ROOT_PATH = File.expand_path('../../../spec/docxtor2', __FILE__)
-
-  puts "ROOT_PATH is #{ROOT_PATH}"
-
   module Tests
+    ROOT_PATH = File.expand_path('../../../spec/docxtor2', __FILE__)
+
     SUPPORT_DIR = 'support'
     SUPPORT_PATH = File.join(ROOT_PATH, SUPPORT_DIR)
 
@@ -21,5 +19,9 @@ module Docxtor2
       MINIMAL_PATH = File.join(PATH, 'minimal')
       DEFAULT_PATH = File.join(PATH, 'default')
     end
+  end
+
+  module Namespaces
+    
   end
 end

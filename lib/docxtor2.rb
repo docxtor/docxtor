@@ -1,3 +1,6 @@
+require "builder"
+require "configus"
+
 require "docxtor2/version"
 require "docxtor2/constants"
 require "docxtor2/configus"
@@ -16,12 +19,11 @@ module Docxtor2
     end
   end
 
-  def self.generate(template, docx, &block)
-    @document = Builder.build(template, &block)
-    Generator.generate(docx, @document)
-  end
-
-  def self.document
-    @document
+  def self.generate(docx, &block)
+    parts = TemplateParser.parse(configus.templates.default)
+    document = Builder.build(parts[:document], block)
+    Generator.generate :template => configus.templates.default, 
+                       :docx => docx, 
+                       :document => document
   end
 end
