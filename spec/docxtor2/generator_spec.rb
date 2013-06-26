@@ -1,9 +1,11 @@
 require 'spec_helper'
 
 describe Docxtor2::Generator do
+  let(:document) { Docxtor2::Model::Document.new({}) }
+  
   include_context 'template' do
     it 'should generate file by given filepath and source document' do
-      Docxtor2::Generator.generate(template, docx) do
+      Docxtor2::Generator.generate(docx, document) do
         p "Paragraph1"
       end
 

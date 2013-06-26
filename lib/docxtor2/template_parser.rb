@@ -19,15 +19,15 @@ module Docxtor2
     private 
     
     def parse(template)
-      Dir.chdir(@template) do
-        files = Dir[configus.tempates.search_pattern]
+      Dir.chdir(template) do
+        files = Dir[configus.search_pattern]
         return Hash[files.map { |file| create_part(file) }]
       end
     end
 
     def create_part(file)
       content = File.read(file)
-      part = Part.new(file, content)
+      part = Model::Document::Part.new(file, content)
 
       [file, part]
     end

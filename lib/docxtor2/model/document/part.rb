@@ -5,7 +5,7 @@ module Docxtor2
 
       def initialize(filepath, content)
         @filepath = filepath.gsub(configus.builder_ext, '')
-        @is_dynamic = self.is_dynamic?(@filepath)
+        @is_dynamic = self.class.is_dynamic?(@filepath)
 
         @content = content
       end
@@ -13,7 +13,7 @@ module Docxtor2
       private
 
       def self.is_dynamic?(filename)
-        File.extname(@filename) == configus.builder_ext
+        File.extname(filename) == configus.builder_ext
       end
     end
   end
