@@ -1,13 +1,15 @@
 require "builder"
-require "configus"
 
 require "docxtor2/version"
-require "docxtor2/constants"
-require "docxtor2/configus"
+require "docxtor2/known/parts"
+require "docxtor2/known/path"
+require "docxtor2/known/templates"
 
 module Docxtor2
   autoload :Generator, 'docxtor2/generator'
-  autoload :Builder, 'docxtor2/builder'
+  autoload :Serializer, 'docxtor2/serializer'
+  autoload :XmlBuilder, 'docxtor2/xml_builder'
+  autoload :DocumentBuilder, 'docxtor2/document_builder'
   autoload :TemplateParser, 'docxtor2/template_parser'
   module Model
     autoload :Node, 'docxtor2/model/node'
@@ -19,11 +21,7 @@ module Docxtor2
     end
   end
 
-  def self.generate(docx, &block)
-    parts = TemplateParser.parse(configus.templates.default)
-    document = Builder.build(parts[:document], block)
-    Generator.generate :template => configus.templates.default, 
-                       :docx => docx, 
-                       :document => document
+  def self.generate(docx, template = Known::Templates.DEFAULT, &block)
+    Generator.generate(docx, template, block)
   end
 end

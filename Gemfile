@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'rubyzip', :git => 'https://github.com/aussiegeek/rubyzip.git'
-gem 'configus', :git => 'https://github.com/kaize/configus.git'
 
 group :test, :development do
   gem 'pre-commit'

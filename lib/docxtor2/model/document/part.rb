@@ -13,7 +13,7 @@ module Docxtor2
       private
 
       def self.is_dynamic?(filename)
-        File.extname(filename) == configus.builder_ext
+        File.extname(filename) == BUILDER_EXT
       end
     end
   end

@@ -16,17 +16,17 @@ module Docxtor2
       @parts
     end
 
-    private 
-    
+    private
+
     def parse(template)
       Dir.chdir(template) do
-        Hash[Dir[configus.search_pattern].map { |file| create_part(file) }]
+        Hash[Dir[SEARCH_PATTERN].map { |file| create_part(file) }]
       end
     end
 
     def create_part(file)
       content = File.read(file)
-      path = file.gsub(configus.builder_ext, '')
+      path = file.gsub(BUILDER_EXT, '')
       part = Model::Document::Part.new(path, content)
       key = File.basename(path, '.xml')
 

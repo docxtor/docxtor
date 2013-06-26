@@ -1,16 +1,37 @@
 require 'spec_helper'
 
-describe Docxtor2::Generator do
-  let(:document) { Docxtor2::Model::Document.new({}) }
-  
-  include_context 'template' do
-    it 'should generate file by given filepath and source document' do
-      Docxtor2::Generator.generate(docx, document) do
-        p "Paragraph1"
+module Docxtor2
+  describe Generator do
+    include_context 'template' do
+      context 'default template' do
+        it 'should generate .docx file by using template DSL' do
+
+          dsl_block = proc {}
+          xml = double
+          docx = double
+          parts = double
+          document double
+
+          TemplateParser.should_receive(:parse).
+            with(template).and_return(parts)
+
+          XmlBuilder.should_receive(:build).
+            with(dsl_block).and_return(xml)
+
+          DocumentBuilder.should_receive(:build).
+            with(parts, xml).and_return(document)
+
+          Serializer.should_receive(:generate).
+            with(
+              :template => Known::Templates.DEFAULT,
+              :document => document,
+              :docx => docx
+            )
+
+          Docxtor2.generate(docx, &dsl_block)
+        end
       end
 
-      File.exists?(docx).should be_true
-      lambda { File.delete(docx) }.should_not raise_error
     end
   end
 end
