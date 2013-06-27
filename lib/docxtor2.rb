@@ -11,15 +11,13 @@ module Docxtor2
   autoload :Generator, 'docxtor2/generator'
   autoload :Serializer, 'docxtor2/serializer'
   autoload :XmlBuilder, 'docxtor2/xml_builder'
-  autoload :DocumentBuilder, 'docxtor2/document_builder'
+  autoload :PackageBuilder, 'docxtor2/package_builder'
   autoload :TemplateParser, 'docxtor2/template_parser'
+  
   module Model
-    autoload :Node, 'docxtor2/model/node'
-    autoload :Story, 'docxtor2/model/story'
-    autoload :Document, 'docxtor2/model/document'
-    class Document
-      autoload :Part, 'docxtor2/model/document/part'
-      autoload :Paragraph, 'docxtor2/model/document/paragraph'
+    autoload :Package, 'docxtor2/model/package'
+    class Package
+      autoload :Part, 'docxtor2/model/package/part'
     end
   end
 

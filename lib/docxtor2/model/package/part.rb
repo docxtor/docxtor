@@ -1,6 +1,6 @@
 module Docxtor2
   module Model
-    class Document::Part
+    class Package::Part
       attr_reader :filepath, :content, :is_dynamic
 
       def initialize(filepath, content)

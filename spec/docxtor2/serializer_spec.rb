@@ -2,9 +2,9 @@ require 'spec_helper'
 
 module Docxtor2
   describe Serializer do
-    let(:document) { 
-      Model::Document.new(
-        :document => Model::Document::Part.new(
+    let(:package) { 
+      Model::Package.new(
+        :document => Model::Package::Part.new(
           'word/document.xml', 'content'
         )
       ) 
@@ -12,7 +12,7 @@ module Docxtor2
 
     include_context 'integration' do
       it 'should generate file by given filepath and source document' do
-        Serializer.serialize(docx, document) do
+        Serializer.serialize(docx, package) do
           p "Paragraph1"
         end
 

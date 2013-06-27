@@ -1,0 +1,42 @@
+module Docxtor2
+  class PackageBuilder
+    class << self
+      def build(parts, xml)
+        instance = new(parts, xml)
+        instance.package
+      end
+    end
+
+    def initialize(parts, xml)
+      @package = Model::Package.new(parts)
+      create_document(xml)
+    end
+
+    def package
+      @package
+    end
+
+    private
+
+    def create_document(content)
+      xml = Builder::XmlMarkup.new(
+        :target => @package.document,
+        :indent => 2
+      )
+      xml.instruct! :xml, :version => "1.0", :encoding=>"UTF-8", :standalone => "yes"
+      xml.w :document, "xmlns:ve" => "http://schemas.openxmlformats.org/markup-compatibility/2006",
+                       "xmlns:o" => "urn:schemas-microsoft-com:office:office",
+                       "xmlns:r" => "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+                       "xmlns:m" => "http://schemas.openxmlformats.org/officeDocument/2006/math",
+                       "xmlns:v" => "urn:schemas-microsoft-com:vml",
+                       "xmlns:wp" => "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing",
+                       "xmlns:w10" => "urn:schemas-microsoft-com:office:word",
+                       "xmlns:w" => "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+                       "xmlns:wne" => "http://schemas.microsoft.com/office/word/2006/wordml" do |xml|
+        xml.w :body do |xml|
+          xml << content
+        end
+      end
+    end
+  end
+end

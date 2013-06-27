@@ -9,8 +9,7 @@ module Docxtor2
 
     def initialize(block)
       @xml = ''
-
-      @b = ::Builder::XmlMarkup.new(
+      @b = Builder::XmlMarkup.new(
         :target => @xml,
         :indent => 2
       )
