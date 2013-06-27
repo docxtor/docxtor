@@ -7,7 +7,7 @@ module Docxtor2
 
       it 'should found exact count of template files' do
         expected = Dir.chdir(template) { 
-          Dir[search_pattern].length 
+          Dir[SEARCH_PATTERN].length 
         }
         subject.parts.length.should eql(expected)
       end

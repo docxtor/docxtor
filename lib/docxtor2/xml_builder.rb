@@ -1,7 +1,7 @@
 module Docxtor2
   class XmlBuilder
     class << self
-      def build(document, &block)
+      def build(&block)
         instance = new(block)
         instance.xml
       end

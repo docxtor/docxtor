@@ -5,10 +5,7 @@ module Docxtor2
         parts = TemplateParser.parse(template)
         xml = XmlBuilder.build(block)
         document = DocumentBuilder.build(parts, xml)
-
-        Serializer.serialize :template => template,
-                             :docx => docx,
-                             :document => document
+        Serializer.serialize(docx, document)
       end
     end
   end

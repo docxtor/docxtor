@@ -6,6 +6,7 @@ end
 require 'rspec-xml'
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'docxtor2'
+require 'spec/docxtor2/support/matchers'
 
 if ENV["TRAVIS"]
   require 'coveralls'
@@ -22,7 +23,8 @@ RSpec.configure do |config|
   config.before(:all) do
     Dir.mkdir(Docxtor2::Known::Path::TMP, 0700)
   end
+
   config.after(:all) do
-    Dir.rmdir(Docxtor2::Known::Path::TMP)
+    FileUtils.rm_rf(Docxtor2::Known::Path::TMP)
   end
 end

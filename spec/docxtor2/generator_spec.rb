@@ -10,7 +10,7 @@ module Docxtor2
           xml = double
           docx = double
           parts = double
-          document double
+          document = double
 
           TemplateParser.should_receive(:parse).
             with(template).and_return(parts)
@@ -21,12 +21,8 @@ module Docxtor2
           DocumentBuilder.should_receive(:build).
             with(parts, xml).and_return(document)
 
-          Serializer.should_receive(:generate).
-            with(
-              :template => Known::Templates.DEFAULT,
-              :document => document,
-              :docx => docx
-            )
+          Serializer.should_receive(:serialize).
+            with(docx, document)
 
           Docxtor2.generate(docx, &dsl_block)
         end

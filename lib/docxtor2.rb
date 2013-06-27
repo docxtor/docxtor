@@ -1,6 +1,8 @@
 require "builder"
+require "zip"
 
 require "docxtor2/version"
+require "docxtor2/constants"
 require "docxtor2/known/parts"
 require "docxtor2/known/path"
 require "docxtor2/known/templates"
@@ -21,7 +23,7 @@ module Docxtor2
     end
   end
 
-  def self.generate(docx, template = Known::Templates.DEFAULT, &block)
-    Generator.generate(docx, template, block)
+  def self.generate(docx, template = Known::Templates::DEFAULT, &block)
+    Generator.generate(docx, template, &block)
   end
 end

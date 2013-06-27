@@ -2,14 +2,10 @@ require 'spec_helper'
 
 module Docxtor2
   describe Docxtor2::XmlBuilder do
-    include_context 'template' do
-      let(:parts) { TemplateParser.parse(template) }
-
-      it 'should contain paragraph when given by DSL' do
-        Builder.build {
-          p 'Paragraph'
-        }.should have_xpath('//w:p/w:r/w:t')
-      end
+    it 'should contain paragraph when given by DSL' do
+      XmlBuilder.build {
+        p 'Paragraph'
+      }.should exist_xpath('//w:p/w:r/y:t')
     end
   end
 end
