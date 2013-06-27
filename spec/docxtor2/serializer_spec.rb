@@ -10,7 +10,7 @@ module Docxtor2
       ) 
     }
 
-    include_context 'template' do
+    include_context 'integration' do
       it 'should generate file by given filepath and source document' do
         Serializer.serialize(docx, document) do
           p "Paragraph1"

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Docxtor2
   describe Docxtor2::TemplateParser do
-    include_context 'template' do
+    include_context 'integration' do
       subject { TemplateParser.new(template) }
 
       it 'should found exact count of template files' do
