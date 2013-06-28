@@ -5,7 +5,7 @@ module Docxtor2
     it 'should contain paragraph when given by DSL' do
       ContentBuilder.build {
         p 'Paragraph'
-      }.should exist_xpath('//w:p/w:r/y:t')
+      }.should exist_xpath('//w:p/w:r/w:t')
     end
   end
 end

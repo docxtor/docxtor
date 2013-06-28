@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
-  # Required for ruby ree-1.8.7
+  # HINT: Version lock is required for ruby ree-1.8.7
   spec.add_development_dependency "nokogiri", "~> 1.4.0"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "rspec-xml"
