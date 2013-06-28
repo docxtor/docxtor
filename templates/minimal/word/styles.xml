@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:style w:styleId="h1" w:type="paragraph">
+    <w:name w:val="h1"/>
+    <w:qFormat/>
+    <w:rsid w:val="00F85845"/>
+    <w:pPr>
+      <w:spacing w:line="480" w:lineRule="auto"/>
+      <w:ind w:firstLine="480"/>
+      <w:outlineLvl w:val="0"/>
+    </w:pPr>
+    <w:rPr>
+      <w:rFonts w:ascii="Algerian" w:hAnsi="Algerian"/>
+      <w:sz w:val="40"/>
+    </w:rPr>
+  </w:style>
+</w:styles>

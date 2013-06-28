@@ -9,11 +9,7 @@ module Docxtor2
 
     def initialize(block)
       @xml = ''
-      @b = Builder::XmlMarkup.new(
-        :target => @xml,
-        :indent => 2
-      )
-
+      @b = Builder::XmlMarkup.new(:target => @xml)
       instance_eval &block
     end
 

@@ -25,7 +25,9 @@ module Docxtor2
     end
 
     def create_parts
-      Dir[SEARCH_PATTERN].map { |file| create_part(file) }
+      Dir[SEARCH_PATTERN].
+        delete_if { |file| File.directory?(file) }.
+        map { |file| create_part(file) }
     end
 
     def create_part(file)

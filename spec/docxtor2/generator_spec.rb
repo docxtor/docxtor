@@ -3,7 +3,7 @@ require 'spec_helper'
 module Docxtor2
   describe Generator do
     context 'default template' do
-      it 'should generate .docx file by using template DSL' do
+      it 'should guarantee that known collaborators receive required calls and return required values' do
 
         dsl_block = proc {}
         content = double
@@ -17,7 +17,7 @@ module Docxtor2
           and_return(parts)
 
         ContentBuilder.should_receive(:build).
-          with(dsl_block).
+          with(&dsl_block).
           and_return(content)
 
         Model::Package::Document.should_receive(:new).
