@@ -20,7 +20,7 @@ module Docxtor2
 
     def parse(template)
       Dir.chdir(template) do
-        Hash[create_parts(template)]
+        Hash[create_parts]
       end
     end
 
@@ -30,9 +30,8 @@ module Docxtor2
 
     def create_part(file)
       content = File.read(file)
-      path = file.gsub(BUILDER_EXT, '')
-      part = Model::Package::Part.new(path, content)
-      key = File.basename(path, '.xml')
+      part = Model::Package::Part.new(file, content)
+      key = File.basename(file, '.xml')
 
       [key, part]
     end

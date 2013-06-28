@@ -1,4 +1,4 @@
 module Docxtor2
-  BUILDER_EXT = '.xml.builder'
-  SEARCH_PATTERN = File.join('**', '*.{xml,builder}')
+  SEARCH_PATTERN = File.join('**', '*.xml')
+  DOCUMENT_XML_PATH = 'word/document.xml'
 end

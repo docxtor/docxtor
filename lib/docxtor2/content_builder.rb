@@ -1,5 +1,5 @@
 module Docxtor2
-  class XmlBuilder
+  class ContentBuilder
     class << self
       def build(&block)
         instance = new(block)

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 module Docxtor2
-  describe Docxtor2::XmlBuilder do
+  describe ContentBuilder do
     it 'should contain paragraph when given by DSL' do
-      XmlBuilder.build {
+      ContentBuilder.build {
         p 'Paragraph'
       }.should exist_xpath('//w:p/w:r/y:t')
     end

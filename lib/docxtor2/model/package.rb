@@ -3,16 +3,9 @@ module Docxtor2
     class Package
       attr_reader :parts
 
-      def initialize(parts)
+      def initialize(parts, document)
         @parts = parts
-      end
-
-      def document
-        @parts[Known::Parts::DOCUMENT]
-      end
-
-      def document=(val)
-        @parts[Known::Parts::DOCUMENT] = val
+        @parts[Known::Parts::DOCUMENT] = document
       end
     end
   end

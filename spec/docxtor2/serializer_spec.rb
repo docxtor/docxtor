@@ -3,9 +3,9 @@ require 'spec_helper'
 module Docxtor2
   describe Serializer do
     let(:package) { 
-      Model::Package.new(
-        :document => Model::Package::Part.new(
-          'word/document.xml', 'content'
+      Model::Package.new({},
+        Model::Package::Document.new(
+          DOCUMENT_XML_PATH, 'content'
         )
       ) 
     }

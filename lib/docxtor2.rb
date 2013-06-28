@@ -10,14 +10,14 @@ require "docxtor2/known/templates"
 module Docxtor2
   autoload :Generator, 'docxtor2/generator'
   autoload :Serializer, 'docxtor2/serializer'
-  autoload :XmlBuilder, 'docxtor2/xml_builder'
-  autoload :PackageBuilder, 'docxtor2/package_builder'
+  autoload :ContentBuilder, 'docxtor2/content_builder'
   autoload :TemplateParser, 'docxtor2/template_parser'
-  
+
   module Model
     autoload :Package, 'docxtor2/model/package'
     class Package
       autoload :Part, 'docxtor2/model/package/part'
+      autoload :Document, 'docxtor2/model/package/document'
     end
   end
 
