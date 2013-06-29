@@ -17,14 +17,8 @@ module Docxtor2
       @xml
     end
 
-    def p(content)
-      @b.w :p do
-        @b.w :r do
-          @b.w :t do
-            @b.text! content
-          end
-        end
-      end
+    def p(text)
+      Model::Package::Document::Paragraph.new(@b, text)
     end
   end
 end

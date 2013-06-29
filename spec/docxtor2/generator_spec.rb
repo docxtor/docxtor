@@ -6,7 +6,6 @@ module Docxtor2
       it 'should guarantee that known collaborators receive required calls and return required values' do
 
         dsl_block = proc {}
-        content = double
         docx = double
         parts = double
         document = double
@@ -16,12 +15,8 @@ module Docxtor2
           with(Known::Templates::DEFAULT).
           and_return(parts)
 
-        ContentBuilder.should_receive(:build).
+        DocumentBuilder.should_receive(:build).
           with(&dsl_block).
-          and_return(content)
-
-        Model::Package::Document.should_receive(:new).
-          with(DOCUMENT_XML_PATH, content).
           and_return(document)
 
         Model::Package.should_receive(:new).

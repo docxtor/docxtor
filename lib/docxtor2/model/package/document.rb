@@ -1,7 +1,7 @@
 module Docxtor2
   module Model
     class Package::Document < Package::Part
-      def initialize(filepath, content)
+      def initialize(content, filepath = DOCUMENT_XML_PATH)
         super(filepath, self.class.create_content(content))
       end
 
