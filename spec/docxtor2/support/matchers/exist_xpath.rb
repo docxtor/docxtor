@@ -23,6 +23,11 @@ module XPathMatchers
 
     private 
     
+    # takes smth like //w:p/w:r and
+    # returns //*[local-name()='p']/*[local-name()='r]
+
+    # TODO: Make it work with attributes
+    # //w:p/w:rPr/w:pStyle[@w:val='h1']
     def self.ignore_namespaces(xpath)
       expressions = xpath.sub(EXPR_PREFIX, '').
         split('/').map { |expr|

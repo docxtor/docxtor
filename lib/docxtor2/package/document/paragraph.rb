@@ -1,10 +1,11 @@
 module Docxtor2
   class Package::Document::Paragraph
-    def initialize(xml, text)
+    def initialize(xml, content, properties = '')
       xml.w :p do
+        xml.w << properties
         xml.w :r do
           xml.w :t do
-            xml.text! text
+            xml << content
           end
         end
       end
