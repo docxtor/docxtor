@@ -5,7 +5,6 @@ RSpec::Matchers.define :exist_xpath do |xpath|
   LOCAL_NAME_EXPR = "*[local-name()='%s']"
 
   match do |actual|
-    p ignore_namespaces(xpath)
     actual.should have_xpath(ignore_namespaces(xpath))
   end
 
