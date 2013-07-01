@@ -17,6 +17,22 @@ module Docxtor2
       @xml
     end
 
+    def table_of_contents!
+      toc!
+    end
+
+    def toc!
+      Package::Document::TableOfContents.new(@b)
+    end
+
+    def h1(text)
+      Package::Document::Heading.new(@b, text, 1)
+    end
+
+    def h2(text)
+      Package::Document::Heading.new(@b, text, 2)
+    end
+
     def p(text)
       Package::Document::Paragraph.new(@b, text)
     end

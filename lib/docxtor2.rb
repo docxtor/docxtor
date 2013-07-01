@@ -19,7 +19,9 @@ module Docxtor2
     autoload :Part, 'docxtor2/package/part'
     autoload :Document, 'docxtor2/package/document'
     class Document
+      autoload :TableOfContents, 'docxtor2/package/document/table_of_contents'
       autoload :Paragraph, 'docxtor2/package/document/paragraph'
+      autoload :Heading, 'docxtor2/package/document/heading'
     end
   end
 

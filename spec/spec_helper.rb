@@ -3,8 +3,11 @@ if ENV["COVERAGE"]
   SimpleCov.start
 end
 
+require 'rspec'
 require 'rspec-xml'
+
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+
 require 'docxtor2'
 
 if ENV["TRAVIS"]
