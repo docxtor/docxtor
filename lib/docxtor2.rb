@@ -1,5 +1,5 @@
 require "builder"
-require "zip"
+require "zip/zip"
 
 require "docxtor2/version"
 require "docxtor2/constants"

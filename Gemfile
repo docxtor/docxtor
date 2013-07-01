@@ -2,8 +2,6 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'rubyzip', :git => 'https://github.com/aussiegeek/rubyzip.git'
-
 group :test, :development do
   gem 'pre-commit'
 end
