@@ -104,4 +104,5 @@
   </w:shapeDefaults>
   <w:decimalSymbol w:val=","/>
   <w:listSeparator w:val=";"/>
+  <w:updateFields w:val="true"/>
 </w:settings>
