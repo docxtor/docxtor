@@ -32,7 +32,7 @@ module Docxtor2
 
     def create_part(file)
       content = File.read(file)
-      part = Model::Package::Part.new(file, content)
+      part = Package::Part.new(file, content)
       key = File.basename(file, '.xml')
 
       [key, part]

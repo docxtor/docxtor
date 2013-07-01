@@ -18,7 +18,7 @@ module Docxtor2
     end
 
     def p(text)
-      Model::Package::Document::Paragraph.new(@b, text)
+      Package::Document::Paragraph.new(@b, text)
     end
   end
 end

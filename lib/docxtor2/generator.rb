@@ -4,7 +4,7 @@ module Docxtor2
       def generate(docx, template, &block)
         parts = TemplateParser.parse(template)
         document = DocumentBuilder.build(&block);
-        package = Model::Package.new(parts, document)
+        package = Package.new(parts, document)
 
         Serializer.serialize(docx, package)
       end

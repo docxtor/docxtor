@@ -2,13 +2,7 @@ require 'spec_helper'
 
 module Docxtor2
   describe Serializer do
-    let(:package) { 
-      Model::Package.new({},
-        Model::Package::Document.new(
-          DOCUMENT_XML_PATH, 'content'
-        )
-      ) 
-    }
+    let(:package) { Package.new({}, Package::Document.new(DOCUMENT_XML_PATH, 'content')) }
 
     include_context 'integration' do
       it 'should generate file by given filepath and source document' do

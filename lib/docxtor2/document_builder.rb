@@ -9,7 +9,7 @@ module Docxtor2
 
     def initialize(block)
       content = ContentBuilder.build(&block)
-      @document = Model::Package::Document.new(content)
+      @document = Package::Document.new(content)
     end
 
     def document

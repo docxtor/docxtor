@@ -19,7 +19,7 @@ module Docxtor2
           with(&dsl_block).
           and_return(document)
 
-        Model::Package.should_receive(:new).
+        Package.should_receive(:new).
           with(parts, document).
           and_return(package)
 

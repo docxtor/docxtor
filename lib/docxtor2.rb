@@ -14,14 +14,12 @@ module Docxtor2
   autoload :ContentBuilder, 'docxtor2/content_builder'
   autoload :TemplateParser, 'docxtor2/template_parser'
 
-  module Model
-    autoload :Package, 'docxtor2/model/package'
-    class Package
-      autoload :Part, 'docxtor2/model/package/part'
-      autoload :Document, 'docxtor2/model/package/document'
-      class Document
-        autoload :Paragraph, 'docxtor2/model/package/document/paragraph'
-      end
+  autoload :Package, 'docxtor2/package'
+  class Package
+    autoload :Part, 'docxtor2/package/part'
+    autoload :Document, 'docxtor2/package/document'
+    class Document
+      autoload :Paragraph, 'docxtor2/package/document/paragraph'
     end
   end
 
