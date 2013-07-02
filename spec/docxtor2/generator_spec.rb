@@ -23,10 +23,9 @@ module Docxtor2
           with(parts, document).
           and_return(package)
 
-        Serializer.should_receive(:serialize).
-          with(docx, package)
+        package.should_receive(:to_stream)
 
-        Docxtor2.generate(docx, &dsl_block)
+        Docxtor2.generate(&dsl_block)
       end
     end
   end
