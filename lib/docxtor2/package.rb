@@ -8,24 +8,25 @@ module Docxtor2
     end
 
     def serialize(filepath)
-      Zip::ZipOutputStream.open(filepath) do |stream|
-        write_parts(stream)
+      Zip::ZipOutputStream.open(filepath) do |ostream|
+        write_parts(ostream)
       end
     end
 
     def to_stream
-      stream = Zip::ZipOutputStream.new("streamed", true)
-      write_parts(stream)
-      stream.close_buffer.rewind
-      stream
+      ostream = Zip::ZipOutputStream.new("streamed", true)
+      write_parts(ostream)
+      string_io = ostream.close_buffer
+      string_io.rewind
+      string_io
     end
 
     private
 
-    def write_parts(stream)
+    def write_parts(ostream)
       @parts.each do |name, part|
-        stream.put_next_entry(part.filepath)
-        stream << part.content
+        ostream.put_next_entry(part.filepath)
+        ostream.puts part.content
       end
     end
   end

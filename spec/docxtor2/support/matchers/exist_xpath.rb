@@ -1,6 +1,5 @@
 module XPathMatchers
   class ExistXPath
-    include RSpec::Matchers
     include RSpecXML::XMLMatchers
 
     EXPR_PREFIX = '//'
