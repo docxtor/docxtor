@@ -1,5 +1,7 @@
 module Docxtor2
   class Package::Document::Heading < Package::Document::Paragraph
+    STYLE_PREFIX = "heading"
+
     def initialize(xml, content, nesting)
       super(xml, content, properties(nesting))
     end
@@ -7,12 +9,12 @@ module Docxtor2
     private
 
     def properties(nesting)
-      properties = ''
-      xml = Builder::XmlMarkup.new(:target => properties)
+      result = ''
+      xml = Builder::XmlMarkup.new(:target => result)
       xml.w :pPr do
-        xml.tag! :pStyle, "w:val" => "h#{nesting}"
+        xml.w :pStyle, "w:val" => "#{STYLE_PREFIX} #{nesting}"
       end
-      properties
+      result
     end
   end
 end

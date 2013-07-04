@@ -6,23 +6,17 @@ module Docxtor2
 
     context 'with DSL instruction' do
       context 'table of contents' do
-        let(:xml) { ContentBuilder.build { toc! } }
-
-        it 'should contain paragraph id' do
-          xml.should exist_xpath('//w:sdt/w:sdtPr/w:id')
-        end
+        subject { ContentBuilder.build { toc! } }
 
         it 'should contain gallery of document parts' do
-          xml.should exist_xpath('//w:sdt/w:sdtPr/w:docPartObj/w:docPartGallery')
-        end
-
-        it 'should contain TOCHeading style' do
-          xml.should exist_xpath('//w:sdt/w:sdtContent/w:p/w:pPr/w:pStyle')
+          subject.should exist_xpath('//w:sdt/w:sdtPr/w:docPartObj/w:docPartGallery')
         end
 
         it 'should contain heading text' do
-          xml.should exist_xpath('//w:sdt/w:sdtContent/w:p/w:r/w:t')
+          subject.should exist_xpath('//w:sdt/w:sdtContent/w:p/w:r/w:t')
         end
+
+        # TODO: Add more precise tests (see TODO in exist_xpath.rb)
       end
 
       it 'should contain paragraph' do
@@ -37,7 +31,6 @@ module Docxtor2
               h1 "Heading1"
             }.should exist_xpath('//w:p/w:pPr/w:pStyle')
         end
-        
       end
     end
   end

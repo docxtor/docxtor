@@ -137,8 +137,22 @@
     <w:lsdException w:name="Intense Reference" w:qFormat="1" w:uiPriority="32"/>
     <w:lsdException w:name="Book Title" w:qFormat="1" w:uiPriority="33"/>
     <w:lsdException w:name="Bibliography" w:semiHidden="1" w:uiPriority="37" w:unhideWhenUsed="1"/>
-    <w:lsdException w:name="TOC Heading" w:qFormat="1" w:semiHidden="1" w:uiPriority="39" w:unhideWhenUsed="1"/>
   </w:latentStyles>
+  <w:style w:styleId="TOCHeading" w:type="paragraph">
+    <w:name w:val="TOC Heading"/>
+    <w:basedOn w:val="Heading1"/>
+    <w:next w:val="Normal"/>
+    <w:uiPriority w:val="39"/>
+    <w:semiHidden/>
+    <w:unhideWhenUsed/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:outlineLvl w:val="9"/>
+    </w:pPr>
+    <w:rPr>
+      <w:lang w:eastAsia="ja-JP"/>
+    </w:rPr>
+  </w:style>
   <w:style w:default="1" w:styleId="a" w:type="paragraph">
     <w:name w:val="Normal"/>
     <w:qFormat/>
