@@ -6,7 +6,7 @@ module Docxtor2
 
     context 'with DSL instruction' do
       context 'table of contents' do
-        subject { ContentBuilder.build { toc! } }
+        subject { ContentBuilder.build { table_of_contents } }
 
         it 'should contain gallery of document parts' do
           subject.should exist_xpath('//w:sdt/w:sdtPr/w:docPartObj/w:docPartGallery')
@@ -28,7 +28,7 @@ module Docxtor2
       context 'heading' do
         it 'should contain style' do
           ContentBuilder.build {
-              h1 "Heading1"
+              h "Heading1", 1
             }.should exist_xpath('//w:p/w:pPr/w:pStyle')
         end
       end

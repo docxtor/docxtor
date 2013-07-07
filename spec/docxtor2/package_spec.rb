@@ -12,7 +12,7 @@ module Docxtor2
         lambda { File.delete(docx) }.should_not raise_error
       end
 
-      context "after serialization" do
+      context 'after serialization' do
         it 'should contain data' do
           string_io = subject.to_stream
           string_io.size.should be > 0

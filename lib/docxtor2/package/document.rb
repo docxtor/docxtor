@@ -1,10 +1,10 @@
 module Docxtor2
   class Package::Document < Package::Part
     def initialize(content, filepath = DOCUMENT_XML_PATH)
-      super(filepath, self.class.create_content(content))
+      super(filepath, self.class.render(content))
     end
 
-    def self.create_content(content)
+    def self.render(content)
       xml = Builder::XmlMarkup.new
       xml.instruct! :xml, :version => "1.0", :encoding=>"UTF-8", :standalone => "yes"
       xml.w :document, "xmlns:ve" => "http://schemas.openxmlformats.org/markup-compatibility/2006",

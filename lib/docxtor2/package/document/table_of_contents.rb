@@ -1,9 +1,7 @@
 module Docxtor2
   class Package::Document::TableOfContents
-    TOC_HEADING_STYLE = "TOCHeading"
-    TOC_PARAGRAPH_STYLE = "toc 1"
+    def initialize(xml, text, styleId = Known::Styles::TOC)
 
-    def initialize(xml)
       xml.w :sdt, "xmlns:w" => "http://schemas.openxmlformats.org/wordprocessingml/2006/main" do |xml|
 
         xml.w :sdtPr do |xml|
@@ -17,18 +15,18 @@ module Docxtor2
           
           xml.w :p do |xml|
             xml.w :pPr do |xml|
-              xml.w :pStyle, "w:val" => TOC_PARAGRAPH_STYLE
+              xml.w :pStyle, "w:val" => styleId
             end
             xml.w :r do |xml|
               xml.w :t do |xml|
-                xml.text! "Contents"
+                xml.text! text
               end
             end
           end
 
           xml.w :p do |xml|
             xml.w :pPr do |xml|
-              xml.w :pStyle, "w:val" => TOC_PARAGRAPH_STYLE
+              xml.w :pStyle, "w:val" => Known::Styles::TOC_PARAGRAPH
               xml.w :tabs do |xml|
                 xml.w :tab, "w:val" => "right", "w:leader" => "dot", "w:pos" => 9350
               end
@@ -51,11 +49,11 @@ module Docxtor2
 
           xml.w :p do |xml|
             xml.w :r do |xml|
-              xml.w :rPr do |xml|
-                xml.w :b
-                xml.w :bCs
-                xml.w :noProof
-              end
+              # xml.w :rPr do |xml|
+              #   xml.w :b
+              #   xml.w :bCs
+              #   xml.w :noProof
+              # end
               xml.w :fldChar, "w:fldCharType" => "end"
             end
           end

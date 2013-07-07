@@ -1,8 +1,6 @@
 require "builder"
 require "zip/zip"
 
-require "docxtor2/version"
-require "docxtor2/constants"
 require "docxtor2/known/parts"
 require "docxtor2/known/path"
 require "docxtor2/known/templates"
@@ -13,11 +11,15 @@ module Docxtor2
   autoload :ContentBuilder, 'docxtor2/content_builder'
   autoload :TemplateParser, 'docxtor2/template_parser'
   autoload :Package, 'docxtor2/package'
+  autoload :Evaluator, 'docxtor2/evaluator'
 
   class Package
     autoload :Part, 'docxtor2/package/part'
     autoload :Document, 'docxtor2/package/document'
     class Document
+      autoload :Element, 'docxtor2/package/document/element'
+      autoload :Run, 'docxtor2/package/document/run'
+      autoload :Text, 'docxtor2/package/document/text'
       autoload :TableOfContents, 'docxtor2/package/document/table_of_contents'
       autoload :Paragraph, 'docxtor2/package/document/paragraph'
       autoload :Heading, 'docxtor2/package/document/heading'
