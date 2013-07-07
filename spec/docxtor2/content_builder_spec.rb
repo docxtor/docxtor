@@ -6,7 +6,7 @@ module Docxtor2
 
     context 'with DSL instruction' do
       context 'table of contents' do
-        subject { ContentBuilder.build { table_of_contents } }
+        subject { ContentBuilder.build { table_of_contents "toc" } }
 
         it 'should contain gallery of document parts' do
           subject.should exist_xpath('//w:sdt/w:sdtPr/w:docPartObj/w:docPartGallery')

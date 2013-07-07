@@ -1,9 +1,11 @@
 require "builder"
 require "zip/zip"
 
+require "docxtor2/constants"
 require "docxtor2/known/parts"
 require "docxtor2/known/path"
 require "docxtor2/known/templates"
+require "docxtor2/known/styles"
 
 module Docxtor2
   autoload :Generator, 'docxtor2/generator'

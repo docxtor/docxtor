@@ -1,7 +1,12 @@
 module Docxtor2
-  class Package::Document::TableOfContents
-    def initialize(xml, text, styleId = Known::Styles::TOC)
+  class Package::Document::TableOfContents < Package::Document::Element
+    def initialize(text, &block)
+      super({ :style => Known::Styles::TOC }, &block)
+    end
 
+    # TODO: Add support for extended styling & properties
+
+    def render(xml)
       xml.w :sdt, "xmlns:w" => "http://schemas.openxmlformats.org/wordprocessingml/2006/main" do |xml|
 
         xml.w :sdtPr do |xml|
@@ -15,7 +20,7 @@ module Docxtor2
           
           xml.w :p do |xml|
             xml.w :pPr do |xml|
-              xml.w :pStyle, "w:val" => styleId
+              xml.w :pStyle, "w:val" => @attrs[:style]
             end
             xml.w :r do |xml|
               xml.w :t do |xml|

@@ -8,14 +8,14 @@ module Docxtor2
         instance.build
       end
     end
-      
+
+    @@map = {
+      :table_of_contents  => Package::Document::TableOfContents,
+      :p                  => Package::Document::Paragraph,
+      :h                  => Package::Document::Heading
+    }
+
     def initialize(block)
-      @klass_map = {
-        :table_of_contents  => Package::Document::TableOfContents,
-        :p                  => Package::Document::Paragraph,
-        :h                  => Package::Document::Heading
-      }
-      
       @elements = []
       evaluate &block
     end
@@ -29,30 +29,29 @@ module Docxtor2
       result
     end
 
-    def method_missing(method_name, *arguments, &block)
-      klass = @klass_map[method_name]
+    def method_missing(name, *args, &block)
+      klass = @@map[name]
       super if klass.nil?
 
-      cache_method_call(method_name, klass)
-
-      self << self.send(method_name, *arguments, &block)
+      cache_method_call(name, klass)
+      self << self.send(name, *args, &block)
     end
 
-    def respond_to_missing?(method_name, include_private = false)
-      @klass_map.key?(method_name) || super
+    def respond_to_missing?(name, include_private = false)
+      @@map.key?(name) || super
     end
 
     private
 
-    def cache_method_call(method_name, klass)
-      define_method(method_name) do |*args, &block| 
+    def cache_method_call(name, klass)
+      self.class.define_method(name) do |*args, &block| 
         klass.new(*args, &block)
       end
     end
 
-    def <<(element)
-      @elements << element
-      element
+    def <<(el)
+      @elements << el
+      el
     end
   end
 end

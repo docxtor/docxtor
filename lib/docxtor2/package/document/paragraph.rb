@@ -6,8 +6,8 @@ module Docxtor2
     end
 
     def render(xml)
-      @xml = xml
-
+      super(xml)
+      
       el(:p) do
         el(:r) do
           contents

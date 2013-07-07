@@ -2,17 +2,22 @@ module Docxtor2
   class Package::Document::Element
     include Evaluator
     
+    PR_SUFFIX = 'Pr'
+
+    @@map = {
+      :p => { :style => 'pStyle', :align => 'jc' },
+      :r => { :bold => 'b', :italic => 'i', :underline => 'u' }
+    }
+
+    attr_reader :attrs
+
     def initialize(attrs = {}, &block)
-      @map = {
-        :p => { :style => 'pStyle', :align => 'jc' },
-        :r => { :bold => 'b', :italic => 'i', :underline => 'u' }
-      }
-      
       @attrs = attrs
       evaluate &block
     end
 
     def render(xml)
+      @xml = xml
       raise NotImplementedError.new
     end
 
@@ -28,7 +33,7 @@ module Docxtor2
     def props(el)  
       @props = props_for(el)
       unless @props.empty?
-        @xml.w :"#{el}Pr" do
+        @xml.w :"#{el}#{PR_SUFFIX}" do
           @props.each { |k, v| prop(k, v) }
         end
       end
@@ -49,7 +54,7 @@ module Docxtor2
     end
 
     def props_for(el)
-      map = @map[el]
+      map = @@map[el]
       pairs = @attrs.
         reject { |k| map.key?(k) }.
         map { |k, v| [map[k], v] }

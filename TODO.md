@@ -2,12 +2,15 @@ DSL должен поддерживать таки штучки:
 
 1) 
 ----------------------
-p do
-  italic
-  bold
-  write "paragraph1"
-  line_break
-  write "paragraph2"
+generate do
+  table_of_contents
+  p do
+    italic
+    bold
+    write "paragraph1"
+    line_break
+    write "paragraph2"
+  end
 end
 
 2) 
