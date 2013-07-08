@@ -14,8 +14,8 @@ module Docxtor2
 	    	actual.should contain_element_style(:p)
 	  	end
 
-	  	def render(attrs = {}, &block)
-				el = Package::Document::Element.new(attrs, &block)
+      def render(attrs = {}, &block)
+        el = Package::Document::Element.new(attrs, &block)
 	    	el.render(builder)
 	    	result
 			end
