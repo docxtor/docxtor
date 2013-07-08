@@ -18,6 +18,8 @@ module Docxtor2
     def initialize(attrs = {}, &block)
       @attrs = attrs
       @block = block
+
+      @attrs[:space] ||= 'default'
     end
 
     def render(xml)
@@ -47,7 +49,7 @@ module Docxtor2
       if self_closing? val
         @xml.w key
       else
-        @xml.tag!(key, 'w:val' => val)
+        @xml.tag!("w:#{key}", 'w:val' => val)
       end
     end
 

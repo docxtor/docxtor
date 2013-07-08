@@ -16,11 +16,11 @@ module Docxtor2
     end
 
     def italic
-      @props[:italic] = true
+      @attrs[:italic] = true
     end
 
     def bold
-      @props[:bold] = true
+      @attrs[:bold] = true
     end
 
     def line_break
@@ -28,7 +28,7 @@ module Docxtor2
     end
 
     def preserve_whitespace
-      @props[:space] = 'preserve'
+      @attrs[:space] = 'preserve'
     end
 
     def write(text)
@@ -46,7 +46,7 @@ module Docxtor2
     end
 
     def text(text)
-      @xml.w :t, 'xml:space' => @props[:space] do
+      @xml.w :t, 'xml:space' => @attrs[:space] do
         @xml.text! text
       end
     end
