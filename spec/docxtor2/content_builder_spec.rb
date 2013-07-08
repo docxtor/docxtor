@@ -5,10 +5,14 @@ module Docxtor2
     include WordprocessingMLMatchers
 
     subject { 
-      ContentBuilder.build {
+      ContentBuilder.build do
         table_of_contents 'Contents'
-        p 'Paragraph', :style => 1
-      }
+        p :style => 3 do
+          text "content 1"
+          line_break
+          text "content 2"
+        end
+      end
     }
 
     it 'should render given DSL instructions' do

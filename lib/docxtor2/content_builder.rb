@@ -25,10 +25,9 @@ module Docxtor2
     end
 
     def build
-      result = ''
-      xml = Builder::XmlMarkup.new(:target => result)
+      xml = Builder::XmlMarkup.new
       @elements.each { |el| el.render(xml) }
-      result
+      xml.target!
     end
 
     def <<(el)

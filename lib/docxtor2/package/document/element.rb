@@ -9,8 +9,8 @@ module Docxtor2
       :r => { :bold => 'b', :italic => 'i', :underline => 'u' }
     }
 
-    def initialize(attrs = {}, &block)
-      @attrs = attrs
+    def initialize(*args, &block)
+      @attrs = args.find { |arg| arg.is_a? Hash } || {}
       @block = block
 
       @attrs[:space] ||= 'default'
@@ -41,7 +41,7 @@ module Docxtor2
 
     def prop(key, val)
       if self_closing? val
-        @xml.w key
+        @xml.tag!("w:#{key}")
       else
         @xml.tag!("w:#{key}", 'w:val' => val)
       end
@@ -55,7 +55,6 @@ module Docxtor2
 
     def props_for(el)
       map = @@map[el]
-      raise ArgumentError, "Element not supported" if map.nil?
       pairs = @attrs.
         reject { |k, v| !map.key?(k) }.
         map { |k, v| [map[k], v] }

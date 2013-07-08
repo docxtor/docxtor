@@ -1,8 +1,8 @@
 module Docxtor2
   class Package::Document::Paragraph < Package::Document::Element
-    def initialize(text = nil, attrs = {}, &block)
-      super(attrs, &block)
-      @contents = [text]
+    def initialize(*args, &block)
+      super(*args, &block)
+      @contents = self.class.create_contents(args)
     end
 
     def render(xml)
@@ -15,12 +15,20 @@ module Docxtor2
       end
     end
 
+    def style(id)
+      @attrs[:style] = id
+    end
+
     def italic
       @attrs[:italic] = true
     end
 
     def bold
       @attrs[:bold] = true
+    end
+
+    def underline
+      @attrs[:underline] = true
     end
 
     def line_break
@@ -53,6 +61,11 @@ module Docxtor2
 
     def br
       @xml.w :br
+    end
+
+    def self.create_contents(args)
+      str = args.find { |arg| arg.is_a? String }
+      str.nil? ? [] : [str]
     end
   end
 end
