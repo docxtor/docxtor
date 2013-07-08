@@ -9,11 +9,15 @@ module Docxtor2
       end
     end
 
-    @@map = {
-      :table_of_contents  => Package::Document::TableOfContents,
+    { :table_of_contents  => Package::Document::TableOfContents,
       :p                  => Package::Document::Paragraph,
-      :h                  => Package::Document::Heading
-    }
+      :h                  => Package::Document::Heading,
+      :table              => NoMethodError.new("Element is not supported yet")
+    }.each do |name, klass|
+      define_method(name) do |*args, &block| 
+        self << klass.new(*args, &block)
+      end
+    end
 
     def initialize(block)
       @elements = []
@@ -23,35 +27,14 @@ module Docxtor2
     def build
       result = ''
       xml = Builder::XmlMarkup.new(:target => result)
-      @elements.each do |el|
-        el.render(xml)
-      end
+      @elements.each { |el| el.render(xml) }
       result
-    end
-
-    def method_missing(name, *args, &block)
-      klass = @@map[name]
-      super if klass.nil?
-
-      cache_method_call(name, klass)
-      self << self.send(name, *args, &block)
-    end
-
-    def respond_to_missing?(name, include_private = false)
-      @@map.key?(name) || super
     end
 
     def <<(el)
       @elements << el
       el
     end
-    
-    private
-
-    def cache_method_call(name, klass)
-      self.class.define_method(name) do |*args, &block| 
-        klass.new(*args, &block)
-      end
-    end
+  
   end
 end
