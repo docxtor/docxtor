@@ -5,15 +5,11 @@ module Docxtor2
   	include_context 'xmlbuilder' do
 
       subject {
-        render(Package::Document::Paragraph, "text1", :bold => true) do
+        render(Package::Document::Paragraph, "text1", :b => true) do
           style 123
-          
-          italic
-          underline
+          i; u
 
-          write "text2"
-          line_break
-          write "text3"
+          w "text2"; br; w "text3"
         end
       }
 

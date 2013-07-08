@@ -13,6 +13,7 @@ module Docxtor2
       :p                  => Package::Document::Paragraph,
       :h                  => Package::Document::Heading,
       :table              => NoMethodError.new("Element is not supported yet")
+      
     }.each do |name, klass|
       define_method(name) do |*args, &block| 
         self << klass.new(*args, &block)

@@ -4,13 +4,22 @@ module Docxtor2
     
     PR_SUFFIX = 'Pr'
 
+    # TODO: Maybe styles for elements should be in element class
+    # or somewhere in one known place, not here
+
+    @@aliases = { 
+      :b => :bold, 
+      :i => :italic, 
+      :u => :underline
+    }
+
     @@map = {
       :p => { :style => 'pStyle', :align => 'jc' },
       :r => { :bold => 'b', :italic => 'i', :underline => 'u' }
     }
 
     def initialize(*args, &block)
-      @attrs = args.find { |arg| arg.is_a? Hash } || {}
+      @attrs = self.class.create_attrs(args)
       @block = block
 
       @attrs[:space] ||= 'default'
@@ -58,6 +67,18 @@ module Docxtor2
       pairs = @attrs.
         reject { |k, v| !map.key?(k) }.
         map { |k, v| [map[k], v] }
+        
+      Hash[pairs]
+    end
+
+    def self.create_attrs(args)
+      hash = args.find { |arg| arg.is_a? Hash } || {}
+      
+      pairs = hash.map do |k, v| 
+        @@aliases.key?(k) ? 
+          [@@aliases[k], v] : [k, v]
+      end
+
       Hash[pairs]
     end
 
