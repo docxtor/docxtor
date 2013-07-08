@@ -13,7 +13,7 @@ module Docxtor2
   autoload :ContentBuilder, 'docxtor2/content_builder'
   autoload :TemplateParser, 'docxtor2/template_parser'
   autoload :Package, 'docxtor2/package'
-  autoload :Evaluator, 'docxtor2/evaluator'
+  autoload :BlockEvaluator, 'docxtor2/block_evaluator'
 
   class Package
     autoload :Part, 'docxtor2/package/part'

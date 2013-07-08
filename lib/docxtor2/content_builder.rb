@@ -1,6 +1,6 @@
 module Docxtor2
   class ContentBuilder
-    include Evaluator
+    include BlockEvaluator
 
     class << self
       def build(&block)
@@ -41,17 +41,17 @@ module Docxtor2
       @@map.key?(name) || super
     end
 
+    def <<(el)
+      @elements << el
+      el
+    end
+    
     private
 
     def cache_method_call(name, klass)
       self.class.define_method(name) do |*args, &block| 
         klass.new(*args, &block)
       end
-    end
-
-    def <<(el)
-      @elements << el
-      el
     end
   end
 end

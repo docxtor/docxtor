@@ -1,6 +1,8 @@
 module Docxtor2
   class Package::Document::Element
-    include Evaluator
+    include BlockEvaluator
+
+    private
     
     PR_SUFFIX = 'Pr'
 
@@ -11,29 +13,31 @@ module Docxtor2
 
     attr_reader :attrs
 
+    public
+
     def initialize(attrs = {}, &block)
       @attrs = attrs
-      evaluate &block
+      @block = block
     end
 
     def render(xml)
       @xml = xml
-      raise NotImplementedError.new
+      evaluate &@block
     end
 
     protected
 
-    def el(name)
-      @xml.w name do
+    def el(name, &block)
+      @xml.tag!("w:#{name}") do
         props(name)
-        yield if block_given?
+        evaluate &block
       end
     end
 
     def props(el)  
       @props = props_for(el)
       unless @props.empty?
-        @xml.w :"#{el}#{PR_SUFFIX}" do
+        @xml.tag!("w:#{el}#{PR_SUFFIX}") do
           @props.each { |k, v| prop(k, v) }
         end
       end
@@ -41,9 +45,9 @@ module Docxtor2
 
     def prop(key, val)
       if self_closing? val
-        @xml.w tag
+        @xml.w key
       else
-        @xml.w tag, 'w:val' => val
+        @xml.tag!(key, 'w:val' => val)
       end
     end
 
@@ -55,10 +59,10 @@ module Docxtor2
 
     def props_for(el)
       map = @@map[el]
+      raise ArgumentError, "Element not supported" if map.nil?
       pairs = @attrs.
-        reject { |k| map.key?(k) }.
+        reject { |k, v| !map.key?(k) }.
         map { |k, v| [map[k], v] }
-
       Hash[pairs]
     end
 

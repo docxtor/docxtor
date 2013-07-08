@@ -5,10 +5,10 @@ module Docxtor2
     subject { Package::Part.new("filename", "content") }
 
     it 'should return given filename' do
-      subject.filename eql("filename")
+      subject.filename.should eql("filename")
     end
     it 'should return given content' do
-      subject.content eql("content")
+      subject.content.should eql("content")
     end
   end
 end

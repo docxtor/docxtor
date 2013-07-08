@@ -25,7 +25,7 @@ module Docxtor2
 
     def write_parts(ostream)
       @parts.each do |name, part|
-        ostream.put_next_entry(part.filepath)
+        ostream.put_next_entry(part.filename)
         ostream.puts part.content
       end
     end

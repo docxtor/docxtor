@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Docxtor2
   describe DocumentBuilder do
-    it 'should call known collaborators methods and return document' do
+    it 'should call known collaborators method and return document' do
       dsl_block = proc {}
       document = double
 

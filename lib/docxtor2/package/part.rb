@@ -1,9 +1,9 @@
 module Docxtor2
   class Package::Part
-    attr_reader :filepath, :content
+    attr_reader :filename, :content
 
-    def initialize(filepath, content)
-      @filepath = filepath
+    def initialize(filename, content)
+      @filename = filename
       @content = content
     end
   end

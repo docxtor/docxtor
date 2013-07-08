@@ -5,7 +5,7 @@ module Docxtor2
     include_context 'integration' do
       subject { TemplateParser.new(template) }
 
-      it 'should found exact count of template files' do
+      it 'should find exact count of template files' do
         expected = Dir.chdir(template) { 
           Dir[SEARCH_PATTERN].
           delete_if { |file| File.directory?(file) }.

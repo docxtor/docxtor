@@ -1,5 +1,5 @@
 module Docxtor2
-  module Evaluator
+  module BlockEvaluator
     def evaluate(&block)
       if block_given?
         if block.arity == 1
