@@ -1,8 +1,6 @@
 module Docxtor2
   class Package::Document::Element
     include BlockEvaluator
-
-    private
     
     PR_SUFFIX = 'Pr'
 
@@ -10,10 +8,6 @@ module Docxtor2
       :p => { :style => 'pStyle', :align => 'jc' },
       :r => { :bold => 'b', :italic => 'i', :underline => 'u' }
     }
-
-    attr_reader :attrs
-
-    public
 
     def initialize(attrs = {}, &block)
       @attrs = attrs
