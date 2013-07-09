@@ -26,7 +26,35 @@ Or install it yourself as:
 
 ## Usage
 
-    TODO
+1)
+
+stream = Docxtor2.generate do
+  table_of_contents "Contents"
+  h 1, "heading1"
+
+  p "text1", :b => true do
+    italic
+    u
+
+    w "paragraph1"
+    br
+    write "paragraph2"
+  end
+
+  h 2 do
+    w "heading2"
+    line_break
+    write "some text"
+    br
+    write "another text"
+  end
+
+  p "text2", :i => true, :align => 'center'
+end
+
+file = File.new('test.docx', 'w')
+file.write(stream.string)
+file.close
 
 ## Contributing
 
