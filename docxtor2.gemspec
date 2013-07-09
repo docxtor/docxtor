@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Docxtor2::VERSION
   spec.authors       = ["Vasiliy Yorkin"]
   spec.email         = ["vasiliy.yorin@gmail.com"]
-  spec.description   = %q{Ruby docx generator, provides its own DSL to simplify things}
+  spec.description   = %q{Ruby docx generator, provides simple DSL for building word documents}
   spec.summary       = %q{Ruby docx generator}
   spec.homepage      = "http://github.com/vyorkin/docxtor2"
   spec.license       = "MIT"
