@@ -26,8 +26,7 @@ Or install it yourself as:
 
 ## Usage
 
-1)
-
+```
 stream = Docxtor2.generate do
   table_of_contents "Contents"
   h 1, "heading1"
@@ -55,6 +54,7 @@ end
 file = File.new('test.docx', 'w')
 file.write(stream.string)
 file.close
+```
 
 ## Contributing
 
