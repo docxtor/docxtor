@@ -32,12 +32,12 @@ stream = Docxtor2.generate do
   h 1, "heading1"
 
   p "text1", :b => true do
-    italic
-    u
+    style 'p1'
+    italic; u
 
-    w "paragraph1"
+    w "text2"
     br
-    write "paragraph2"
+    write "text3"
   end
 
   h 2 do
@@ -48,7 +48,7 @@ stream = Docxtor2.generate do
     write "another text"
   end
 
-  p "text2", :i => true, :align => 'center'
+  p "content", :style => 'p2', :i => true, :align => 'center'
 end
 
 file = File.new('test.docx', 'w')
