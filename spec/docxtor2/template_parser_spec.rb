@@ -11,7 +11,7 @@ module Docxtor2
           delete_if { |file| File.directory?(file) }.
           length 
         }
-        subject.parts.length.should eql(expected)
+        expect { subject.parts.length == expected }
       end
     end
   end

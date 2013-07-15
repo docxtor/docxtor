@@ -6,6 +6,9 @@ end
 require 'rspec'
 require 'rspec-xml'
 
+require 'wrong/adapters/rspec'
+Wrong.config.alias_assert :expect, :override => true
+
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
 require 'docxtor2'

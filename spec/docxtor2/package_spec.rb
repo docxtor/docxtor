@@ -8,14 +8,14 @@ module Docxtor2
       it 'should serialize to file by given filepath and source document' do
         subject.serialize(docx)
 
-        File.exists?(docx).should be_true
+        expect { File.exists?(docx) }
         lambda { File.delete(docx) }.should_not raise_error
       end
 
       context 'after serialization' do
         it 'should contain data' do
           string_io = subject.to_stream
-          string_io.size.should be > 0
+          expect { string_io.size > 0 }
         end
 
         it 'should contain document part' do

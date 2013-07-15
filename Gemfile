@@ -11,6 +11,7 @@ group :test do
   gem 'simplecov', :require => false
   gem 'tconsole'
   gem 'turn'
+  gem 'ZenTest', '4.8.3'
 end
 
 group :development do
