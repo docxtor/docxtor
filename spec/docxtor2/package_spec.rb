@@ -7,7 +7,7 @@ module Docxtor2
     include_context 'integration' do
       context "given filepath and source document" do
         it 'should serialize to file' do
-          subject.serialize(docx)
+          subject.save(docx)
 
           expect { File.exists?(docx) }
           deny { rescuing { File.delete(docx) } }

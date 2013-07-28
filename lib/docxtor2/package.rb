@@ -7,7 +7,7 @@ module Docxtor2
       @parts[Known::Parts::DOCUMENT] = document
     end
 
-    def serialize(filepath)
+    def save(filepath)
       Zip::ZipOutputStream.open(filepath) do |ostream|
         write_parts(ostream)
       end
