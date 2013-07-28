@@ -18,6 +18,8 @@ module Docxtor2
           :hanging => 'hanging'
         }
       }
+      PARAGRAPH_SIMPLE  = PARAGRAPH.reject { |k, v|  v.is_a? Hash }
+      PARAGRAPH_COMPLEX = PARAGRAPH.reject { |k, v| !v.is_a? Hash }
 
       RUN = {
         :bold => 'b',

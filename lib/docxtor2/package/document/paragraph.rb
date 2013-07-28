@@ -2,9 +2,10 @@ module Docxtor2
   class Package::Document::Paragraph < Package::Document::Element
     def initialize(*args, &block)
       super(*args, &block)
+      Known::Mappings::PARAGRAPH_COMPLEX.each do |name, element|
+        @params[name] ||= {}
+      end
       @params[:space] ||= 'default'
-      @params[:spacing] ||= {}
-      @params[:indent] ||= {}
       @contents = create_contents(args)
     end
 
@@ -17,22 +18,14 @@ module Docxtor2
       end
     end
 
-    [:align, :style, :font_size, :font_size_complex].each do |name|
-      define_method(name) do |val|
-        @params[name] = val
-      end
+    Known::Mappings::PARAGRAPH_SIMPLE.each do |name, element|
+      define_method(name) { |val| @params[name] = val }
     end
-
-    [:bold, :italic, :underline].each do |name|
-      define_method(name) do
-        @params[name] = true
-      end
+    Known::Mappings::RUN.each do |name, element|
+      define_method(name) { @params[name] = true }
     end
-
-    [:spacing, :indent].each do |name|
-      define_method(name) do |attrs|
-        @params[name].merge!(attrs)
-      end
+    Known::Mappings::PARAGRAPH_COMPLEX.each do |name, element|
+      define_method(name) { |attrs| @params[name].merge!(attrs) }
     end
 
     def line_break
