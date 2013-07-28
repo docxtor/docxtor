@@ -50,7 +50,10 @@ module Docxtor2
     protected
 
     def mappings
-      super.merge(Known::Mappings::PARAGRAPH)
+      super.merge({
+        :p => Known::Mappings::PARAGRAPH,
+        :r => Known::Mappings::RUN
+      })
     end
 
     def aliases

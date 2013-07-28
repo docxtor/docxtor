@@ -6,7 +6,8 @@ require "docxtor2/known/parts"
 require "docxtor2/known/path"
 require "docxtor2/known/templates"
 require "docxtor2/known/styles"
-require 'docxtor2/known/mappings'
+require "docxtor2/known/mappings"
+require "docxtor2/known/aliases"
 
 module Docxtor2
   autoload :Generator, 'docxtor2/generator'
