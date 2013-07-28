@@ -15,6 +15,7 @@ module Docxtor2
   autoload :Package, 'docxtor2/package'
   autoload :BlockEvaluator, 'docxtor2/block_evaluator'
   autoload :ObjectUtils, 'docxtor2/object_utils'
+  autoload :ElementList, 'docxtor2/element_list'
 
   class Package
     autoload :Part, 'docxtor2/package/part'

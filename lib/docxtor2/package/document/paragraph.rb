@@ -27,6 +27,10 @@ module Docxtor2
       end
     end
 
+    def spacing(*args, &block)
+      @elements << Spacing.new(*args, &block)
+    end
+
     def line_break
       @contents << :br
     end

@@ -1,5 +1,5 @@
 module Docxtor2
-  class ContentBuilder
+  class ContentBuilder < ElementList
     include BlockEvaluator
 
     class << self
@@ -9,30 +9,20 @@ module Docxtor2
       end
     end
 
-    { :table_of_contents  => Package::Document::TableOfContents,
-      :p                  => Package::Document::Paragraph,
-      :h                  => Package::Document::Heading
-    }.each do |name, klass|
-      define_method(name) do |*args, &block|
-        self << klass.new(*args, &block)
-      end
-    end
+    map({ :table_of_contents  => Package::Document::TableOfContents,
+          :p                  => Package::Document::Paragraph,
+          :h                  => Package::Document::Heading
+        })
 
     def initialize(block)
-      @elements = []
+      super()
       evaluate &block
     end
 
     def build
       xml = Builder::XmlMarkup.new
-      @elements.each { |el| el.render(xml) }
+      write_elements(xml)
       xml.target!
     end
-
-    def <<(el)
-      @elements << el
-      el
-    end
-
   end
 end

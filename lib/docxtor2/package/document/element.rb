@@ -1,15 +1,13 @@
 module Docxtor2
-  class Package::Document::Element
+  class Package::Document::Element < ElementList
     include BlockEvaluator
     include ObjectUtils
-
-    PR_SUFFIX = 'Pr'
 
     def initialize(*args, &block)
       @attrs = create_attributes(args)
       @block = block
-
       @attrs[:space] ||= 'default'
+      super()
     end
 
     def render(xml)
@@ -31,13 +29,14 @@ module Docxtor2
       @xml.tag!("w:#{name}") do
         write_properties(name)
         evaluate &block
+        write_elements(@xml)
       end
     end
 
     def write_properties(el)
       @properties = get_properties_for(el)
       unless @properties.nil?
-        @xml.tag!("w:#{el}#{PR_SUFFIX}") do
+        @xml.tag!("w:#{el}Pr") do
           @properties.each { |k, v| write_property(k, v) }
         end
       end
