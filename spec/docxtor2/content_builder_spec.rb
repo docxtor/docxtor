@@ -4,13 +4,13 @@ module Docxtor2
   describe ContentBuilder do
     include WordprocessingMLMatchers
 
-    subject { 
+    subject {
       ContentBuilder.build do
         table_of_contents 'Contents'
         p :style => 3 do
-          text "content 1"
+          write "content 1"
           line_break
-          text "content 2"
+          write "content 2"
         end
       end
     }

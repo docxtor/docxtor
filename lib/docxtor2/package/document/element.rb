@@ -1,25 +1,12 @@
 module Docxtor2
   class Package::Document::Element
     include BlockEvaluator
-    
+    include ObjectUtils
+
     PR_SUFFIX = 'Pr'
 
-    # TODO: Maybe styles for elements should be in element class
-    # or somewhere in one known place, not here
-
-    @@aliases = { 
-      :b => :bold, 
-      :i => :italic, 
-      :u => :underline
-    }
-
-    @@map = {
-      :p => { :style => 'pStyle', :align => 'jc' },
-      :r => { :bold => 'b', :italic => 'i', :underline => 'u' }
-    }
-
     def initialize(*args, &block)
-      @attrs = self.class.create_attrs(args)
+      @attrs = create_attributes(args)
       @block = block
 
       @attrs[:space] ||= 'default'
@@ -32,23 +19,31 @@ module Docxtor2
 
     protected
 
-    def el(name, &block)
+    def mappings
+      {}
+    end
+
+    def aliases
+      {}
+    end
+
+    def write_element(name, &block)
       @xml.tag!("w:#{name}") do
-        props(name)
+        write_properties(name)
         evaluate &block
       end
     end
 
-    def props(el)  
-      @props = props_for(el)
-      unless @props.empty?
+    def write_properties(el)
+      @properties = get_properties_for(el)
+      unless @properties.nil?
         @xml.tag!("w:#{el}#{PR_SUFFIX}") do
-          @props.each { |k, v| prop(k, v) }
+          @properties.each { |k, v| write_property(k, v) }
         end
       end
     end
 
-    def prop(key, val)
+    def write_property(key, val)
       if self_closing? val
         @xml.tag!("w:#{key}")
       else
@@ -62,23 +57,21 @@ module Docxtor2
       !!val == val && val
     end
 
-    def props_for(el)
-      map = @@map[el]
-      pairs = @attrs.
-        reject { |k, v| !map.key?(k) }.
-        map { |k, v| [map[k], v] }
-        
-      Hash[pairs]
+    def get_properties_for(el)
+      map = mappings[el]
+      unless map.nil?
+        pairs = @attrs.
+          reject { |k, v| !map.key?(k) }.
+          map { |k, v| [map[k], v] }
+        Hash[pairs]
+      end
     end
 
-    def self.create_attrs(args)
-      hash = args.find { |arg| arg.is_a? Hash } || {}
-      
-      pairs = hash.map do |k, v| 
-        @@aliases.key?(k) ? 
-          [@@aliases[k], v] : [k, v]
+    def create_attributes(args)
+      hash = find_argument(args, Hash, {})
+      pairs = hash.map do |k, v|
+        aliases.key?(k) ? [aliases[k], v] : [k, v]
       end
-
       Hash[pairs]
     end
 

@@ -9,14 +9,14 @@ module Docxtor2
 
     def render(xml)
       super(xml)
-      
+
       @xml.w :sdt, "xmlns:w" => "http://schemas.openxmlformats.org/wordprocessingml/2006/main" do
 
-        properties
+        write_properties
 
         @xml.w :sdtContent do
 
-          heading
+          write_heading
 
           @xml.w :p do
             @xml.w :pPr do
@@ -31,8 +31,8 @@ module Docxtor2
             @xml.w :r do
               @xml.w :fldChar, "w:fldCharType" => "begin", "w:dirty" => true
             end
-            
-            instruct
+
+            write_instruct
 
             @xml.w :r do
               @xml.w :fldChar, "w:fldCharType" => "separate"
@@ -56,7 +56,7 @@ module Docxtor2
 
     private
 
-    def properties
+    def write_properties
       @xml.w :sdtPr do
         @xml.w :docPartObj do
           @xml.w :docPartGallery, "w:val" => "Table of Contents"
@@ -65,7 +65,7 @@ module Docxtor2
       end
     end
 
-    def heading
+    def write_heading
       @xml.w :p do
         @xml.w :pPr do
           @xml.w :pStyle, "w:val" => @attrs[:style]
@@ -78,7 +78,7 @@ module Docxtor2
       end
     end
 
-    def instruct
+    def write_instruct
       @xml.w :r do
         @xml.w :instrText, "xml:space" => "preserve" do
           @xml.text! " TOC \\o '1-3' \\h \\z \\u "

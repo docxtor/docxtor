@@ -3,14 +3,14 @@ module Docxtor2
 
     def initialize(*args, &block)
       super(*args, &block)
-      @contents = self.class.create_contents(args)
+      @contents = create_contents(args)
     end
 
     def render(xml)
-      super(xml)      
-      el(:p) do
-        el(:r) do
-          contents
+      super(xml)
+      write_element(:p) do
+        write_element(:r) do
+          write_contents
         end
       end
     end
@@ -39,24 +39,47 @@ module Docxtor2
       @contents << text
     end
 
-    private 
+    protected
 
-    def contents
-      @contents.each { |c| content(c) }
+    def mappings
+      super.merge({
+        :p => { :style => 'pStyle', :align => 'jc' },
+        :r => { :bold => 'b', :italic => 'i', :underline => 'u' }
+      })
     end
 
-    def content(c)
-      c == :br ? (@xml.w :br) : text(c)
+    def aliases
+      super.merge({
+        :b => :bold,
+        :i => :italic,
+        :u => :underline
+      })
     end
 
-    def text(text)
+    private
+
+    def write_contents
+      @contents.each { |c| write_content(c) }
+    end
+
+    def write_content(content)
+      content == :br ?
+        write_line_break :
+        write_text(content)
+    end
+
+    def write_line_break
+      (@xml.w :br)
+    end
+
+    def write_text(text)
       @xml.w :t, 'xml:space' => @attrs[:space] do
         @xml.text! text
       end
     end
 
-    def self.create_contents(args)
-      str = args.find { |arg| arg.is_a? String }
+    def create_contents(args)
+      str = find_argument(args, String)
       str.nil? ? [] : [str]
     end
 
@@ -67,4 +90,3 @@ module Docxtor2
     alias_method :w, :write
   end
 end
-  
