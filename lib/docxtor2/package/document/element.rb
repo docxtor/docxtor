@@ -4,9 +4,8 @@ module Docxtor2
     include ObjectUtils
 
     def initialize(*args, &block)
-      @attrs = create_attributes(args)
+      @params = create_attributes(args)
       @block = block
-      @attrs[:space] ||= 'default'
       super()
     end
 
@@ -45,26 +44,14 @@ module Docxtor2
     def write_property(key, val)
       if self_closing? val
         @xml.tag!("w:#{key}")
+      elsif val.is_a?(Hash) && !val.empty?
+        @xml.tag!("w:#{key}", prefixize(val))
       else
         @xml.tag!("w:#{key}", 'w:val' => val)
       end
     end
 
     private
-
-    def self_closing?(val)
-      !!val == val && val
-    end
-
-    def get_properties_for(el)
-      map = mappings[el]
-      unless map.nil?
-        pairs = @attrs.
-          reject { |k, v| !map.key?(k) }.
-          map { |k, v| [map[k], v] }
-        Hash[pairs]
-      end
-    end
 
     def create_attributes(args)
       hash = find_argument(args, Hash, {})
@@ -74,5 +61,27 @@ module Docxtor2
       Hash[pairs]
     end
 
+    def self_closing?(val)
+      !!val == val && val
+    end
+
+    def get_properties_for(el)
+      map = mappings[el]
+      unless map.nil?
+        pairs = @params.
+          reject { |k, v| !map.key?(k) }.
+          map { |k, v|
+            element = map[k]
+            element.is_a?(Hash) ?
+              [element[:name], v] :
+              [element, v]
+          }
+        Hash[pairs]
+      end
+    end
+
+    def prefixize(attrs)
+      Hash[attrs.map { |k, v| ["w:#{k}", v] }]
+    end
   end
 end

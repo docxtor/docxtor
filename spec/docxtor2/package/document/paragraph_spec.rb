@@ -7,6 +7,7 @@ module Docxtor2
       subject {
         render(Package::Document::Paragraph, "text1", :b => true) do
           style 123
+          spacing :before => 80, :after => 240
           i; u
 
           w "text2"; br; w "text3"
@@ -15,6 +16,10 @@ module Docxtor2
 
       it 'should contain reference to style' do
         subject.should contain_element_style(:p)
+      end
+
+      it 'should contain spacing properties' do
+        subject.should contain_element_property(:p, :spacing)
       end
 
       context 'nested run' do

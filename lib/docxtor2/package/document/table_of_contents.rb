@@ -68,7 +68,7 @@ module Docxtor2
     def write_heading
       @xml.w :p do
         @xml.w :pPr do
-          @xml.w :pStyle, "w:val" => @attrs[:style]
+          @xml.w :pStyle, "w:val" => @params[:style]
         end
         @xml.w :r do
           @xml.w :t do

@@ -3,6 +3,8 @@ module Docxtor2
 
     def initialize(*args, &block)
       super(*args, &block)
+      @params[:space] ||= 'default'
+      @params[:spacing] ||= {}
       @contents = create_contents(args)
     end
 
@@ -17,18 +19,18 @@ module Docxtor2
 
     [:align, :style].each do |name|
       define_method(name) do |val|
-        @attrs[name] = val
+        @params[name] = val
       end
     end
 
     [:bold, :italic, :underline].each do |name|
       define_method(name) do
-        @attrs[name] = true
+        @params[name] = true
       end
     end
 
-    def spacing(*args, &block)
-      @elements << Spacing.new(*args, &block)
+    def spacing(attrs)
+      @params[:spacing].merge!(attrs)
     end
 
     def line_break
@@ -36,7 +38,7 @@ module Docxtor2
     end
 
     def preserve_whitespace
-      @attrs[:space] = 'preserve'
+      @params[:space] = 'preserve'
     end
 
     def write(text)
@@ -47,8 +49,20 @@ module Docxtor2
 
     def mappings
       super.merge({
-        :p => { :style => 'pStyle', :align => 'jc' },
-        :r => { :bold => 'b', :italic => 'i', :underline => 'u' }
+        :p => {
+          :style => 'pStyle',
+          :align => 'jc',
+          :spacing => {
+            :name => 'spacing',
+            :before => 'before',
+            :after => 'after'
+          }
+        },
+        :r => {
+          :bold => 'b',
+          :italic => 'i',
+          :underline => 'u'
+        }
       })
     end
 
@@ -77,7 +91,7 @@ module Docxtor2
     end
 
     def write_text(text)
-      @xml.w :t, 'xml:space' => @attrs[:space] do
+      @xml.w :t, 'xml:space' => @params[:space] do
         @xml.text! text
       end
     end
