@@ -5,6 +5,7 @@ module Docxtor2
       super(*args, &block)
       @params[:space] ||= 'default'
       @params[:spacing] ||= {}
+      @params[:indent] ||= {}
       @contents = create_contents(args)
     end
 
@@ -29,8 +30,10 @@ module Docxtor2
       end
     end
 
-    def spacing(attrs)
-      @params[:spacing].merge!(attrs)
+    [:spacing, :indent].each do |name|
+      define_method(name) do |attrs|
+        @params[name].merge!(attrs)
+      end
     end
 
     def line_break
@@ -56,6 +59,12 @@ module Docxtor2
             :name => 'spacing',
             :before => 'before',
             :after => 'after'
+          },
+          :indent => {
+            :name => 'ind',
+            :start => 'start',
+            :end => 'end',
+            :hanging => 'hanging'
           }
         },
         :r => {
@@ -106,5 +115,6 @@ module Docxtor2
     alias_method :u, :underline
     alias_method :br, :line_break
     alias_method :w, :write
+    alias_method :ind, :indent
   end
 end

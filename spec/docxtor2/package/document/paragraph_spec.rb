@@ -8,6 +8,7 @@ module Docxtor2
         render(Package::Document::Paragraph, "text1", :b => true) do
           style 123
           spacing :before => 80, :after => 240
+          indent :start => 720
           i; u
 
           w "text2"; br; w "text3"
@@ -20,6 +21,10 @@ module Docxtor2
 
       it 'should contain spacing properties' do
         subject.should contain_element_property(:p, :spacing)
+      end
+
+      it 'should contain indentiation properties' do
+        subject.should contain_element_property(:p, :ind)
       end
 
       context 'nested run' do
