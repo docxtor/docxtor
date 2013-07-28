@@ -54,11 +54,7 @@ module Docxtor2
     end
 
     def aliases
-      super.merge({
-        :b => :bold,
-        :i => :italic,
-        :u => :underline
-      })
+      super.merge(Known::Aliases::PARAGRAPH)
     end
 
     private
