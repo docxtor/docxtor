@@ -66,7 +66,7 @@ module Docxtor2
     end
 
     def write_line_break
-      (@xml.w :br)
+      @xml.w :br
     end
 
     def write_text(text)
