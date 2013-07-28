@@ -33,6 +33,7 @@ stream = Docxtor2.generate do
 
   p "text1", :b => true do
     style 'p1'
+    spacing :before => 80, :after => 240
     italic; u
 
     w "text2"
