@@ -1,12 +1,13 @@
 require 'spec_helper'
 
-describe Docxtor2 do
-  it 'should not throw errors when supplied all the same parameters that Generator takes' do
-    docx = double
-    lambda {
-      Docxtor2.generate(Docxtor2::Known::Templates::DEFAULT) do 
-        p "Paragraph"
-      end
-    }.should_not raise_error
+describe Docxtor2, "#generate" do
+  context "when supplied all the same parameters that Generator takes" do
+    it 'should not throw errors' do
+      deny { rescuing {
+          Docxtor2.generate do
+            p "Paragraph"
+          end
+      } }
+    end
   end
 end

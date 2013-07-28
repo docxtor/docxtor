@@ -21,10 +21,10 @@ module XPathMatchers
       @target.should have_xpath(self.class.ignore_namespaces(@expected))
     end
 
-    private 
+    private
 
     # TODO: Write tests, use this instead of old version
-    
+
     # def self.to_local_name2(expr)
     #   parts = expr.sub('*', '').split('[')
     #   result = LOCAL_NAME_EXPR % parts.first.split(':').last
@@ -40,9 +40,9 @@ module XPathMatchers
     # end
 
     # TODO: Make it work with attributes
-    
+
     # //person[@id='abc123']/@*[name()='weight' or name()='haircolor']
-    # //person[@id='abc123']/(@haircolor|@weight)`  
+    # //person[@id='abc123']/(@haircolor|@weight)`
 
     # [@id='abc123']
     # @*[name()='weight' or name()='haircolor']

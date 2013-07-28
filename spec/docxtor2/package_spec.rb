@@ -5,11 +5,13 @@ module Docxtor2
     subject { Package.new({}, Package::Document.new('content', DOCUMENT_XML_PATH)) }
 
     include_context 'integration' do
-      it 'should serialize to file by given filepath and source document' do
-        subject.serialize(docx)
+      context "given filepath and source document" do
+        it 'should serialize to file' do
+          subject.serialize(docx)
 
-        expect { File.exists?(docx) }
-        lambda { File.delete(docx) }.should_not raise_error
+          expect { File.exists?(docx) }
+          deny { rescuing { File.delete(docx) } }
+        end
       end
 
       context 'after serialization' do
@@ -22,11 +24,12 @@ module Docxtor2
           string_io = subject.to_stream
           istream = Zip::ZipInputStream.open_buffer(string_io)
 
-          lambda { 
-            document_entry = istream.get_next_entry 
-            document_entry.should_not be_nil
-            document_entry.name.should eql(DOCUMENT_XML_PATH)
-          }.should_not raise_error
+          deny { rescuing {
+            document_entry = istream.get_next_entry
+
+            expect { document_entry != nil }
+            expect { document_entry.name == DOCUMENT_XML_PATH }
+          } }
         end
       end
     end
