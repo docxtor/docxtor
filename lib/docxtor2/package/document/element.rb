@@ -44,10 +44,12 @@ module Docxtor2
     def write_property(key, val)
       if self_closing? val
         @xml.tag!("w:#{key}")
-      elsif val.is_a?(Hash) && !val.empty?
-        @xml.tag!("w:#{key}", prefixize(val))
-      else
-        @xml.tag!("w:#{key}", 'w:val' => val)
+      elsif !val.nil?
+        if val.is_a?(Hash) && !val.empty?
+          @xml.tag!("w:#{key}", prefixize(val))
+        elsif !val.to_s.empty?
+          @xml.tag!("w:#{key}", 'w:val' => val)
+        end
       end
     end
 

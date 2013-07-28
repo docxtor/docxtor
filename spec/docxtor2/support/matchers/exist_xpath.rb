@@ -40,6 +40,7 @@ module XPathMatchers
     # end
 
     # TODO: Make it work with attributes
+    # //*[local-name()='a'][*[local-name()='aCode']='aaa']
 
     # //person[@id='abc123']/@*[name()='weight' or name()='haircolor']
     # //person[@id='abc123']/(@haircolor|@weight)`

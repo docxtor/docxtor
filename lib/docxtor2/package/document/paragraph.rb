@@ -1,6 +1,5 @@
 module Docxtor2
   class Package::Document::Paragraph < Package::Document::Element
-
     def initialize(*args, &block)
       super(*args, &block)
       @params[:space] ||= 'default'

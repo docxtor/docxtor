@@ -11,7 +11,8 @@ module Docxtor2
 
     map({ :table_of_contents  => Package::Document::TableOfContents,
           :p                  => Package::Document::Paragraph,
-          :h                  => Package::Document::Heading
+          :h                  => Package::Document::Heading,
+          :page_break         => Package::Document::PageBreak
         })
 
     def initialize(block)

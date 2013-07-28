@@ -27,6 +27,7 @@ module Docxtor2
       autoload :TableOfContents, 'docxtor2/package/document/table_of_contents'
       autoload :Paragraph, 'docxtor2/package/document/paragraph'
       autoload :Heading, 'docxtor2/package/document/heading'
+      autoload :PageBreak, 'docxtor2/package/document/page_break'
     end
   end
 
