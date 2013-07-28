@@ -8,6 +8,8 @@ module Docxtor2
         render(Package::Document::Paragraph, "text1", :b => true) do
           style 123
           spacing :before => 80, :after => 240
+          font_size 32
+          font_size_complex 30
           indent :start => 720
           i; u
 
@@ -19,11 +21,19 @@ module Docxtor2
         subject.should contain_element_style(:p)
       end
 
-      it 'should contain spacing properties' do
+      it 'should contain spacing property' do
         subject.should contain_element_property(:p, :spacing)
       end
 
-      it 'should contain indentiation properties' do
+      it 'should contain font size property' do
+        subject.should contain_element_property(:p, :sz)
+      end
+
+      it 'should contain complex font size property' do
+        subject.should contain_element_property(:p, :szCs)
+      end
+
+      it 'should contain indentiation property' do
         subject.should contain_element_property(:p, :ind)
       end
 

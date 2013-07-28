@@ -17,7 +17,7 @@ module Docxtor2
       end
     end
 
-    [:align, :style].each do |name|
+    [:align, :style, :font_size, :font_size_complex].each do |name|
       define_method(name) do |val|
         @params[name] = val
       end
@@ -54,6 +54,8 @@ module Docxtor2
         :p => {
           :style => 'pStyle',
           :align => 'jc',
+          :font_size => 'sz',
+          :font_size_complex => 'szCs',
           :spacing => {
             :name => 'spacing',
             :before => 'before',
