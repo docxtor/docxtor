@@ -17,36 +17,36 @@ module Docxtor2
         end
       }
 
-      it 'should contain reference to style' do
+      it 'contains reference to style' do
         subject.should contain_element_style(:p)
       end
 
-      it 'should contain spacing property' do
+      it 'contains spacing property' do
         subject.should contain_element_property(:p, :spacing)
       end
 
-      it 'should contain font size property' do
+      it 'contains font size property' do
         subject.should contain_element_property(:p, :sz)
       end
 
-      it 'should contain complex font size property' do
+      it 'contains complex font size property' do
         subject.should contain_element_property(:p, :szCs)
       end
 
-      it 'should contain indentiation property' do
+      it 'contains indentiation property' do
         subject.should contain_element_property(:p, :ind)
       end
 
       context 'nested run' do
-      	it 'should be bold' do
+      	it 'is bold' do
           subject.should contain_element_property(:r, :b)
         end
 
-        it 'should be italic' do
+        it 'is italic' do
           subject.should contain_element_property(:r, :i)
         end
 
-        it 'should be underlined' do
+        it 'is underlined' do
           subject.should contain_element_property(:r, :u)
         end
     	end

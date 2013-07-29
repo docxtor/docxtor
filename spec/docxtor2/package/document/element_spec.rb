@@ -12,7 +12,7 @@ module Docxtor2
         end
       }
 
-	    it 'should render element with attributes' do
+	    it 'renders element with attributes' do
 	  		subject.should contain_paragraph_run
 	  	end
 		end

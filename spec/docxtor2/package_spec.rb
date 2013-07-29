@@ -6,7 +6,7 @@ module Docxtor2
 
     include_context 'integration' do
       context "given filepath and source document" do
-        it 'should serialize to file' do
+        it 'saves to file' do
           subject.save(docx)
 
           expect { File.exists?(docx) }
@@ -15,12 +15,12 @@ module Docxtor2
       end
 
       context 'after serialization' do
-        it 'should contain data' do
+        it 'contains data' do
           string_io = subject.to_stream
           expect { string_io.size > 0 }
         end
 
-        it 'should contain document part' do
+        it 'contains document part' do
           string_io = subject.to_stream
           istream = Zip::ZipInputStream.open_buffer(string_io)
 

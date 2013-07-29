@@ -15,7 +15,7 @@ module Docxtor2
       end
     }
 
-    it 'should render given DSL instructions' do
+    it 'renders given DSL instructions' do
       subject.should contain_paragraph_text
       subject.should contain_element_style(:p)
       subject.should contain_table_of_contents

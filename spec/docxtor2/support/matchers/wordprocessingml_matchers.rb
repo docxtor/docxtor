@@ -1,6 +1,8 @@
 # encoding: utf-8
+require File.expand_path('xpath_matchers', File.dirname(__FILE__))
 
 module WordprocessingMLMatchers
+	extend RSpec::Matchers::DSL
 	include XPathMatchers
 
 	def contain_body
@@ -22,6 +24,8 @@ module WordprocessingMLMatchers
 	def contain_element_style(el)
 		contain_element_property(el, 'pStyle')
 	end
+
+	# TODO: These a not the same, fix it
 
 	def contain_gallery_of_document_parts
 		exist_xpath('//w:sdt/w:sdtPr/w:docPartObj/w:docPartGallery')

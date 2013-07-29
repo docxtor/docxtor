@@ -6,7 +6,7 @@ module Docxtor2
 
     subject { Package::Document.new('content', DOCUMENT_XML_PATH) }
 
-    it 'should contain body' do
+    it 'contains body' do
       subject.content.should contain_body
     end
   end

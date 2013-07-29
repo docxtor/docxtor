@@ -3,7 +3,7 @@ require 'spec_helper'
 module Docxtor2
   describe Generator do
     context 'default template' do
-      it 'should guarantee that known collaborators receive required calls and return required values' do
+      it 'guarantees that known collaborators receive required calls and return required values' do
 
         dsl_block = proc {}
         docx = double
