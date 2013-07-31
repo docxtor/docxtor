@@ -4,8 +4,7 @@ module Docxtor2
       def generate(template, &block)
         parts = TemplateParser.parse(template)
         document = DocumentBuilder.build(&block);
-        package = Package.new(parts, document)
-        package.to_stream
+        Package.new(parts, document)
       end
     end
   end

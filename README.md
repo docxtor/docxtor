@@ -27,7 +27,7 @@ Or install it yourself as:
 ## Usage
 
 ```
-stream = Docxtor2.generate do
+package = Docxtor2.generate do
   table_of_contents "Contents"
   h 1, "heading1"
 
@@ -52,9 +52,7 @@ stream = Docxtor2.generate do
   p "content", :style => 'p2', :i => true, :align => 'center'
 end
 
-file = File.new('test.docx', 'w')
-file.write(stream.string)
-file.close
+package.save('test.docx')
 ```
 
 ## Contributing
