@@ -1,2 +1,5 @@
-1) Paragraph spacing support
-2) Dynamic style generations
+1) Paragraph spacing support [Done]
+2) Dynamic style generation
+3) Tables
+4) Lists
+5) Images
