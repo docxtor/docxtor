@@ -8,7 +8,8 @@ docxtor2
 
 ## Summary
 
-Ruby docx generator
+Ruby docx generator.
+Supported ruby versions: ree-1.8.7, mri 1.8.7
 
 ## Installation
 
