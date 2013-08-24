@@ -11,6 +11,13 @@ docxtor2
 Ruby docx generator.
 Supported ruby versions: ree-1.8.7, mri 1.8.7
 
+## Features
+
+1. Paragraphs and headings: bold, italic, custom style id, line breaks, page breaks, spacing
+2. Table of contents
+
+More to come, stay tuned!
+
 ## Installation
 
 Add this line to your application's Gemfile:
