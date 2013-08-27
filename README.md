@@ -63,6 +63,51 @@ end
 package.save('test.docx')
 ```
 
+more usage examples:
+
+```
+# Usage sample:
+# elements - any collection of your elements, so in this example i have:
+# class Element
+#   attr_reader :title1, :title2, :content
+# end
+# elements = Array.new(5, Element)
+
+# Somewhere in your controller:
+
+def action_method
+  @stream = Docxtor2.generate do
+    p 'Paragraph text', :align => 'center', :b => true
+    table_of_contents 'Table of contents'
+    page_break
+    
+    elements.each do |el|
+      h 1, el.title do
+        spacing :before => 120, :after => 120
+  
+        write el.title1
+        write ", blahblah "
+        br
+        write el.title2
+      end
+  
+      p do
+        el.content.lines.map(&:chomp).each do |line|
+          write line; br
+        end
+      end
+      
+    end
+  end
+  
+  send_data(
+    @stream.read,
+    :filename => 'yourfilename.docx',
+    :type =>'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+  )
+end
+```
+
 ## Contributing
 
 1. Fork it
