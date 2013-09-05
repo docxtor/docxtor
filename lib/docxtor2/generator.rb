@@ -2,9 +2,11 @@ module Docxtor2
   class Generator
     class << self
       def generate(template, &block)
-        parts = TemplateParser.parse(template)
+        template_parser = TemplateParser.new(template)
+        parts = template_parser.parts
+
         document = DocumentBuilder.build(&block);
-        Package.new(parts, document)
+        PackageBuilder.new(parts, document)
       end
     end
   end

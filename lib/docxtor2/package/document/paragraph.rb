@@ -1,7 +1,7 @@
 module Docxtor2
   module Package
     module Document
-      class Paragraph < Package::Document::Element
+      class Paragraph < Element
         def initialize(*args, &block)
           super(*args, &block)
           Known::Mappings::PARAGRAPH_COMPLEX.each do |name, element|

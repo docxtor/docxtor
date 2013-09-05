@@ -1,6 +1,6 @@
 module Docxtor2
   shared_context 'integration' do
-    let(:template) { Known::Templates::DEFAULT }
-    let(:docx) { File.join(Known::Path::TMP, 'test.docx') }
+    let(:template) { File.join(File.dirname(__FILE__), "..", "..", "..", "..", "templates", "default") }
+    let(:docx) { File.join(File.dirname(__FILE__), "..", "..", "tmp", 'test.docx') }
   end
 end

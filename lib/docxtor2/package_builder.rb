@@ -1,5 +1,5 @@
 module Docxtor2
-  class Package
+  class PackageBuilder
     attr_reader :parts
 
     def initialize(parts, document)

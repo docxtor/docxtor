@@ -1,7 +1,7 @@
 module Docxtor2
   module Package
     module Document
-      class TableOfContents < Package::Document::Element
+      class TableOfContents < Element
         def initialize(text, &block)
           super({ :style => Known::Styles::TOC }, &block)
           @text = text

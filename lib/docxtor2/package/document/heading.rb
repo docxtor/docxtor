@@ -1,7 +1,7 @@
 module Docxtor2
   module Package
     module Document
-      class Heading < Package::Document::Paragraph
+      class Heading < Paragraph
         H1 = 1
         H2 = 2
 

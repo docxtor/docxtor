@@ -1,7 +1,7 @@
 module Docxtor2
   module Package
     module Document
-      class PageBreak < Package::Document::Element
+      class PageBreak < Element
         def initialize(*args, &block)
           super(*args, &block)
         end

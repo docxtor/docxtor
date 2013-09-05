@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Docxtor2
   describe Package do
-    subject { Package.new({}, Package::Document.new('content', DOCUMENT_XML_PATH)) }
+    subject { PackageBuilder.new({}, Package::DocumentBuilder.new('content')) }
 
     include_context 'integration' do
       context "given filepath and source document" do
@@ -28,7 +28,7 @@ module Docxtor2
             document_entry = istream.get_next_entry
 
             expect { document_entry != nil }
-            expect { document_entry.name == DOCUMENT_XML_PATH }
+            expect { document_entry.name == "word/document.xml" }
           } }
         end
       end
