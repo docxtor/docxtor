@@ -2,7 +2,6 @@ module Docxtor2
   module Package
     module Document
       class Element < ElementList
-        include BlockEvaluator
         include ObjectUtils
 
         def initialize(*args, &block)
@@ -13,7 +12,7 @@ module Docxtor2
 
         def render(xml)
           @xml = xml
-          evaluate &@block
+          instance_eval &@block if @block
         end
 
         protected
@@ -29,7 +28,7 @@ module Docxtor2
         def write_element(name, &block)
           @xml.tag!("w:#{name}") do
             write_properties(name)
-            evaluate &block
+            instance_eval &block if block_given?
             write_elements(@xml)
           end
         end

@@ -1,7 +1,5 @@
 module Docxtor2
   class ContentBuilder < ElementList
-    include BlockEvaluator
-
     class << self
       def build(&block)
         instance = new(block)
@@ -17,7 +15,7 @@ module Docxtor2
 
     def initialize(block)
       super()
-      evaluate &block
+      instance_eval &block
     end
 
     def build

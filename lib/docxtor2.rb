@@ -14,7 +14,6 @@ module Docxtor2
   autoload :DocumentBuilder, 'docxtor2/document_builder'
   autoload :ContentBuilder, 'docxtor2/content_builder'
   autoload :TemplateParser, 'docxtor2/template_parser'
-  autoload :BlockEvaluator, 'docxtor2/block_evaluator'
   autoload :ObjectUtils, 'docxtor2/object_utils'
   autoload :ElementList, 'docxtor2/element_list'
   autoload :PackageBuilder, "docxtor2/package_builder"
