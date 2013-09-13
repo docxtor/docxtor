@@ -3,12 +3,15 @@ module Docxtor2
     module Document
       class Paragraph < Element
         def initialize(*args, &block)
-          super(*args, &block)
+          @contents = []
+          @contents << args.shift if args.first.is_a? String
+          options = args.shift || {}
+
+          super(options, &block)
           Known::Mappings::PARAGRAPH_COMPLEX.each do |name, element|
             @params[name] ||= {}
           end
           @params[:space] ||= 'default'
-          @contents = create_contents(args)
         end
 
         def render(xml)
@@ -52,7 +55,11 @@ module Docxtor2
         end
 
         def aliases
-          super.merge(Known::Aliases::PARAGRAPH)
+          super.merge({
+                        :b => :bold,
+                        :i => :italic,
+                        :u => :underline
+                      })
         end
 
         private
@@ -75,11 +82,6 @@ module Docxtor2
           @xml.w :t, 'xml:space' => @params[:space] do
             @xml.text! text
           end
-        end
-
-        def create_contents(args)
-          str = find_argument(args, String)
-          str.nil? ? [] : [str]
         end
 
         alias_method :b, :bold

@@ -2,10 +2,8 @@ module Docxtor2
   module Package
     module Document
       class Element < ElementList
-        include ObjectUtils
-
-        def initialize(*args, &block)
-          @params = create_attributes(args)
+        def initialize(options = {}, &block)
+          @params = create_params(options)
           @block = block
           super()
         end
@@ -56,12 +54,8 @@ module Docxtor2
 
         private
 
-        def create_attributes(args)
-          hash = find_argument(args, Hash, {})
-          pairs = hash.map do |k, v|
-            aliases.key?(k) ? [aliases[k], v] : [k, v]
-          end
-          Hash[pairs]
+        def create_params(options)
+          Hash[options.map {|k,v| [aliases[k] || k, v]}]
         end
 
         def self_closing?(val)

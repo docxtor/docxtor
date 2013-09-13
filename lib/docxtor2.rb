@@ -7,14 +7,12 @@ require "docxtor2/known/parts"
 require "docxtor2/known/path"
 require "docxtor2/known/styles"
 require "docxtor2/known/mappings"
-require "docxtor2/known/aliases"
 
 module Docxtor2
   autoload :Generator, 'docxtor2/generator'
   autoload :DocumentBuilder, 'docxtor2/document_builder'
   autoload :ContentBuilder, 'docxtor2/content_builder'
   autoload :TemplateParser, 'docxtor2/template_parser'
-  autoload :ObjectUtils, 'docxtor2/object_utils'
   autoload :ElementList, 'docxtor2/element_list'
   autoload :PackageBuilder, "docxtor2/package_builder"
 
