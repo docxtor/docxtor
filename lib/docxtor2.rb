@@ -10,7 +10,6 @@ require "docxtor2/known/mappings"
 
 module Docxtor2
   autoload :Generator, 'docxtor2/generator'
-  autoload :DocumentBuilder, 'docxtor2/document_builder'
   autoload :ContentBuilder, 'docxtor2/content_builder'
   autoload :TemplateParser, 'docxtor2/template_parser'
   autoload :ElementList, 'docxtor2/element_list'

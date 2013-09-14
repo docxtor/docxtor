@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Docxtor2
   describe Package do
-    subject { PackageBuilder.new({}, Package::DocumentBuilder.new('content')) }
+    subject { PackageBuilder.new({}, Package::Part.new("word/document.xml", 'content')) }
 
     include_context 'integration' do
       context "given filepath and source document" do

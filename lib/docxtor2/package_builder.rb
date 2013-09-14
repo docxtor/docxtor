@@ -4,7 +4,7 @@ module Docxtor2
 
     def initialize(parts, document)
       @parts = parts
-      @parts[Known::Parts::DOCUMENT] = document
+      @parts['document'] = document
     end
 
     def save(filepath)

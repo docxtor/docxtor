@@ -5,7 +5,7 @@ module Docxtor2
         template_parser = TemplateParser.new(template)
         parts = template_parser.parts
 
-        document = DocumentBuilder.build(&block);
+        document = Package::DocumentBuilder.new(&block)
         PackageBuilder.new(parts, document)
       end
     end

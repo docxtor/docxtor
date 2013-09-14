@@ -1,7 +1,8 @@
 module Docxtor2
   module Package
     class DocumentBuilder < Part
-      def initialize(content, filepath = 'word/document.xml')
+      def initialize(filepath = 'word/document.xml', &block)
+        content = ContentBuilder.build(&block)
         super(filepath, self.class.render(content))
       end
 
