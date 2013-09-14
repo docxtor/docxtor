@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 module Docxtor2
-  describe ContentBuilder do
+  describe Document::ContentBuilder do
     include WordprocessingMLMatchers
 
     subject {
-      ContentBuilder.build do
+      Document::ContentBuilder.build do
         table_of_contents 'Contents'
         p :style => 3 do
           write "content 1"
