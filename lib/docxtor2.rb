@@ -6,7 +6,6 @@ require "docxtor2/version"
 module Docxtor2
   autoload :Generator, 'docxtor2/generator'
   autoload :TemplateParser, 'docxtor2/template_parser'
-  autoload :ElementList, 'docxtor2/element_list'
 
   module Document
     autoload :Builder, 'docxtor2/document/builder'

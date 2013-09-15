@@ -1,7 +1,19 @@
 module Docxtor2
   module Document
-    class Element < ElementList
+    class Element
+      attr_accessor :elements
+
+      def self.map(mappings)
+        mappings.each do |name, klass|
+          define_method(name) do |*args, &block|
+            elements << klass.new(*args, &block)
+            elements.last
+          end
+        end
+      end
+
       def initialize(options = {}, &block)
+        @elements = []
         @params = create_params(options)
         @block = block
         super()
@@ -20,6 +32,10 @@ module Docxtor2
 
       def aliases
         {}
+      end
+
+      def write_elements(xml)
+        @elements.each { |el| el.render(xml) }
       end
 
       def write_element(name, &block)
