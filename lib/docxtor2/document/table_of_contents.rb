@@ -1,8 +1,11 @@
 module Docxtor2
   module Document
     class TableOfContents < Element
+      STYLE = 'defprnRUSSelStyle'
+      PARAGRAPH_STYLE = '10'
+
       def initialize(text, &block)
-        super({ :style => Known::Styles::TOC }, &block)
+        super({ :style => STYLE }, &block)
         @text = text
       end
 
@@ -21,7 +24,7 @@ module Docxtor2
 
             @xml.w :p do
               @xml.w :pPr do
-                @xml.w :pStyle, "w:val" => Known::Styles::TOC_PARAGRAPH
+                @xml.w :pStyle, "w:val" => PARAGRAPH_STYLE
                 @xml.w :tabs do
                   @xml.w :tab, "w:val" => "right", "w:leader" => "dot", "w:pos" => 9350
                 end

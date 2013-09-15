@@ -1,13 +1,41 @@
 module Docxtor2
   module Document
     class Paragraph < Element
+      PARAGRAPH = {
+        :style => 'pStyle',
+        :align => 'jc',
+        :font_size => 'sz',
+        :font_size_complex => 'szCs',
+        :spacing => {
+          :name => 'spacing',
+          :before => 'before',
+          :after => 'after'
+        },
+        :indent => {
+          :name => 'ind',
+          :start => 'start',
+          :end => 'end',
+          :hanging => 'hanging'
+        }
+      }
+      PARAGRAPH_SIMPLE  = PARAGRAPH.reject { |k, v|  v.is_a? Hash }
+      PARAGRAPH_COMPLEX = PARAGRAPH.reject { |k, v| !v.is_a? Hash }
+
+      RUN = {
+        :bold => 'b',
+        :italic => 'i',
+        :underline => 'u'
+      }
+
+      STYLE = 'a5'
+
       def initialize(*args, &block)
         @contents = []
         @contents << args.shift if args.first.is_a? String
         options = args.shift || {}
 
         super(options, &block)
-        Known::Mappings::PARAGRAPH_COMPLEX.each do |name, element|
+        PARAGRAPH_COMPLEX.each do |name, element|
           @params[name] ||= {}
         end
         @params[:space] ||= 'default'
@@ -22,13 +50,13 @@ module Docxtor2
         end
       end
 
-      Known::Mappings::PARAGRAPH_SIMPLE.each do |name, element|
+      PARAGRAPH_SIMPLE.each do |name, element|
         define_method(name) { |val| @params[name] = val }
       end
-      Known::Mappings::RUN.each do |name, element|
+      RUN.each do |name, element|
         define_method(name) { @params[name] = true }
       end
-      Known::Mappings::PARAGRAPH_COMPLEX.each do |name, element|
+      PARAGRAPH_COMPLEX.each do |name, element|
         define_method(name) { |attrs| @params[name].merge!(attrs) }
       end
 
@@ -48,8 +76,8 @@ module Docxtor2
 
       def mappings
         super.merge({
-                      :p => Known::Mappings::PARAGRAPH,
-                      :r => Known::Mappings::RUN
+                      :p => PARAGRAPH,
+                      :r => RUN
                     })
       end
 
