@@ -5,7 +5,7 @@ module Docxtor2
 
       def initialize(parts, document)
         @parts = parts
-        @parts['document'] = document
+        @parts['document'] = Part.new("word/document.xml", document.content)
       end
 
       def save(filepath)

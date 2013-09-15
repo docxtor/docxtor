@@ -1,26 +1,14 @@
 module Docxtor2
   module Document
-    class ContentBuilder < ElementList
-      class << self
-        def build(&block)
-          instance = new(block)
-          instance.build
-        end
-      end
-
+    class Root < Element
       map({ :table_of_contents  => Document::TableOfContents,
             :p                  => Document::Paragraph,
             :h                  => Document::Heading,
             :page_break         => Document::PageBreak
           })
 
-      def initialize(block)
-        super()
-        instance_eval &block
-      end
-
-      def build
-        xml = ::Builder::XmlMarkup.new
+      def render(xml)
+        super
         write_elements(xml)
         xml.target!
       end

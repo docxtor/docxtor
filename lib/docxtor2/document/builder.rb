@@ -1,12 +1,13 @@
 module Docxtor2
   module Document
-    class Builder < Package::Part
-      def initialize(filepath = 'word/document.xml', &block)
-        content = Document::ContentBuilder.build(&block)
-        super(filepath, self.class.render(content))
+    class Builder
+      attr_accessor :content
+
+      def initialize(&block)
+        @content = render(&block)
       end
 
-      def self.render(content)
+      def render(&block)
         xml = ::Builder::XmlMarkup.new
 
         xml.instruct! :xml, :version => "1.0", :encoding => "UTF-8", :standalone => "yes"
@@ -20,7 +21,7 @@ module Docxtor2
         "xmlns:w" => "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
         "xmlns:wne" => "http://schemas.microsoft.com/office/word/2006/wordml" do
           xml.w :body do
-            xml << content
+            xml << Document::Root.new(&block).render(xml)
           end
         end
 

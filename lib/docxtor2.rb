@@ -10,8 +10,8 @@ module Docxtor2
 
   module Document
     autoload :Builder, 'docxtor2/document/builder'
-    autoload :ContentBuilder, 'docxtor2/document/content_builder'
     autoload :Element, 'docxtor2/document/element'
+    autoload :Root, 'docxtor2/document/root'
     autoload :Run, 'docxtor2/document/run'
     autoload :Text, 'docxtor2/document/text'
     autoload :TableOfContents, 'docxtor2/document/table_of_contents'
