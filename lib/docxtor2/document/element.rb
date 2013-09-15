@@ -1,13 +1,12 @@
 module Docxtor2
   module Document
     class Element
-      attr_accessor :elements
+      attr_accessor :elements, :xml
 
       def self.map(mappings)
         mappings.each do |name, klass|
           define_method(name) do |*args, &block|
             elements << klass.new(*args, &block)
-            elements.last
           end
         end
       end
@@ -36,22 +35,22 @@ module Docxtor2
         {}
       end
 
-      def write_elements(xml)
-        @elements.each { |el| el.render(xml) }
+      def write_elements
+        @elements.each { |el| el.render(@xml) }
       end
 
       def write_element(name, &block)
-        @xml.tag!("w:#{name}") do
+        xml.tag!("w:#{name}") do
           write_properties(name)
           instance_eval &block if block_given?
-          write_elements(@xml)
+          write_elements
         end
       end
 
       def write_properties(el)
         @properties = get_properties_for(el)
         if @properties
-          @xml.tag!("w:#{el}Pr") do
+          xml.tag!("w:#{el}Pr") do
             @properties.each { |k, v| write_property(k, v) }
           end
         end
@@ -59,12 +58,12 @@ module Docxtor2
 
       def write_property(key, val)
         if self_closing? val
-          @xml.tag!("w:#{key}")
+          xml.tag!("w:#{key}")
         elsif val
           if val.is_a?(Hash) && !val.empty?
-            @xml.tag!("w:#{key}", prefixize(val))
-          elsif !val.to_s.empty?
-            @xml.tag!("w:#{key}", 'w:val' => val)
+            xml.tag!("w:#{key}", prefixize(val))
+          else
+            xml.tag!("w:#{key}", 'w:val' => val)
           end
         end
       end
@@ -76,20 +75,14 @@ module Docxtor2
       end
 
       def self_closing?(val)
-        !!val == val && val
+        val == true
       end
 
       def get_properties_for(el)
-        map = properties[el]
-        unless map.nil?
+        props = properties[el]
+        if props
           pairs = @params.
-            reject { |k, v| !map.key?(k) }.
-            map { |k, v|
-            element = map[k]
-            element.is_a?(Hash) ?
-            [element[:name], v] :
-            [element, v]
-          }
+            map { |k, v| props[k] && [props[k][:name] || props[k], v] }
           Hash[pairs]
         end
       end

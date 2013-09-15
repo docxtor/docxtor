@@ -9,7 +9,7 @@ module Docxtor2
 
       def render(xml)
         super
-        write_elements(xml)
+        write_elements
         xml.target!
       end
     end
