@@ -1,33 +1,39 @@
 module Docxtor2
   module Document
     class Paragraph < Element
-      PARAGRAPH = {
-        :style => 'pStyle',
-        :align => 'jc',
-        :font_size => 'sz',
-        :font_size_complex => 'szCs',
-        :spacing => {
-          :name => 'spacing',
-          :before => 'before',
-          :after => 'after'
+      STYLE = 'a5'
+
+      PROPERTIES =
+        {
+        :p => {
+          :style => 'pStyle',
+          :align => 'jc',
+          :font_size => 'sz',
+          :font_size_complex => 'szCs',
+          :spacing => {
+            :name => 'spacing',
+            :before => 'before',
+            :after => 'after'
+          },
+          :indent => {
+            :name => 'ind',
+            :start => 'start',
+            :end => 'end',
+            :hanging => 'hanging'
+          }
         },
-        :indent => {
-          :name => 'ind',
-          :start => 'start',
-          :end => 'end',
-          :hanging => 'hanging'
+        :r => {
+          :bold => 'b',
+          :italic => 'i',
+          :underline => 'u'
         }
       }
-      PARAGRAPH_SIMPLE  = PARAGRAPH.reject { |k, v|  v.is_a? Hash }
-      PARAGRAPH_COMPLEX = PARAGRAPH.reject { |k, v| !v.is_a? Hash }
 
-      RUN = {
-        :bold => 'b',
-        :italic => 'i',
-        :underline => 'u'
-      }
+      PLAIN_PROPERTIES =
+        PROPERTIES[:p].reject {|k,v| v.is_a? Hash}
 
-      STYLE = 'a5'
+      NESTED_PROPERTIES =
+        PROPERTIES[:p].reject {|k,v| !v.is_a? Hash}
 
       def after_initialize(*args)
         @contents = []
@@ -35,7 +41,7 @@ module Docxtor2
 
         create_params(args.shift || {})
 
-        PARAGRAPH_COMPLEX.each do |name, element|
+        NESTED_PROPERTIES.each do |name, element|
           @params[name] ||= {}
         end
         @params[:space] ||= 'default'
@@ -50,14 +56,20 @@ module Docxtor2
         end
       end
 
-      PARAGRAPH_SIMPLE.each do |name, element|
+      PLAIN_PROPERTIES.each do |name, element|
         define_method(name) { |val| @params[name] = val }
       end
-      RUN.each do |name, element|
+
+      PROPERTIES[:r].each do |name, element|
         define_method(name) { @params[name] = true }
       end
-      PARAGRAPH_COMPLEX.each do |name, element|
+
+      NESTED_PROPERTIES.each do |name, element|
         define_method(name) { |attrs| @params[name].merge!(attrs) }
+      end
+
+      def properties
+        PROPERTIES
       end
 
       def line_break
@@ -72,21 +84,12 @@ module Docxtor2
         @contents << text
       end
 
-      protected
-
-      def mappings
-        super.merge({
-                      :p => PARAGRAPH,
-                      :r => RUN
-                    })
-      end
-
       def aliases
-        super.merge({
-                      :b => :bold,
-                      :i => :italic,
-                      :u => :underline
-                    })
+        {
+          :b => :bold,
+          :i => :italic,
+          :u => :underline
+        }
       end
 
       private

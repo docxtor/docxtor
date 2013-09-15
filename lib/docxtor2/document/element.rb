@@ -28,7 +28,7 @@ module Docxtor2
 
       def after_initialize *args; end
 
-      def mappings
+      def properties
         {}
       end
 
@@ -50,7 +50,7 @@ module Docxtor2
 
       def write_properties(el)
         @properties = get_properties_for(el)
-        unless @properties.nil?
+        if @properties
           @xml.tag!("w:#{el}Pr") do
             @properties.each { |k, v| write_property(k, v) }
           end
@@ -60,7 +60,7 @@ module Docxtor2
       def write_property(key, val)
         if self_closing? val
           @xml.tag!("w:#{key}")
-        elsif !val.nil?
+        elsif val
           if val.is_a?(Hash) && !val.empty?
             @xml.tag!("w:#{key}", prefixize(val))
           elsif !val.to_s.empty?
@@ -80,7 +80,7 @@ module Docxtor2
       end
 
       def get_properties_for(el)
-        map = mappings[el]
+        map = properties[el]
         unless map.nil?
           pairs = @params.
             reject { |k, v| !map.key?(k) }.
