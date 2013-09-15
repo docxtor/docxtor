@@ -1,10 +1,6 @@
 module Docxtor2
   module Document
     class PageBreak < Element
-      def initialize(*args, &block)
-        super(*args, &block)
-      end
-
       def render(xml)
         super(xml)
         write_element(:p) do

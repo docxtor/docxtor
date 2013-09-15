@@ -12,19 +12,21 @@ module Docxtor2
         end
       end
 
-      def initialize(options = {}, &block)
+      def initialize(*args, &block)
         @elements = []
-        @params = create_params(options)
-        @block = block
-        super()
+
+        after_initialize(*args)
+
+        instance_eval &block if block_given?
       end
 
       def render(xml)
         @xml = xml
-        instance_eval &@block if @block
       end
 
       protected
+
+      def after_initialize *args; end
 
       def mappings
         {}
@@ -70,7 +72,7 @@ module Docxtor2
       private
 
       def create_params(options)
-        Hash[options.map {|k,v| [aliases[k] || k, v]}]
+        @params = Hash[options.map {|k,v| [aliases[k] || k, v]}]
       end
 
       def self_closing?(val)

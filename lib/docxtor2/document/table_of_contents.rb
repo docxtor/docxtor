@@ -4,8 +4,8 @@ module Docxtor2
       STYLE = 'defprnRUSSelStyle'
       PARAGRAPH_STYLE = '10'
 
-      def initialize(text, &block)
-        super({ :style => STYLE }, &block)
+      def after_initialize(text)
+        create_params({:style => STYLE})
         @text = text
       end
 

@@ -4,8 +4,8 @@ module Docxtor2
       H1 = 1
       H2 = 2
 
-      def initialize(nesting = H1, *args, &block)
-        super(*args, &block)
+      def after_initialize(nesting = H1, *args)
+        super(*args)
         @params[:style] ||= nesting
       end
     end

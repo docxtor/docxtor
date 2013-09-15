@@ -29,12 +29,12 @@ module Docxtor2
 
       STYLE = 'a5'
 
-      def initialize(*args, &block)
+      def after_initialize(*args)
         @contents = []
         @contents << args.shift if args.first.is_a? String
-        options = args.shift || {}
 
-        super(options, &block)
+        create_params(args.shift || {})
+
         PARAGRAPH_COMPLEX.each do |name, element|
           @params[name] ||= {}
         end
@@ -42,7 +42,7 @@ module Docxtor2
       end
 
       def render(xml)
-        super(xml)
+        super
         write_element(:p) do
           write_element(:r) do
             write_contents
