@@ -1,10 +1,13 @@
 require 'spec_helper'
 
 module Docxtor2
-  describe Package::Document do
+  describe Document::Builder do
   	include WordprocessingMLMatchers
 
-    subject { Package::Document.new('content', DOCUMENT_XML_PATH) }
+    subject { Document::Builder.new do
+      p "Hi"
+      end
+    }
 
     it 'contains body' do
       subject.content.should contain_body

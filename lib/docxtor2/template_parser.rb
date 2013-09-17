@@ -1,31 +1,27 @@
 module Docxtor2
   class TemplateParser
+    attr_accessor :template
 
-    class << self
-      def parse(template)
-        instance = new(template)
-        instance.parts
-      end
-    end
+    FILES_PATTERN = File.join('**', '{*,.}{xml,rels}')
 
     def initialize(template)
-      @parts = parse(template)
+      @template = template || File.join(File.dirname(__FILE__), "..", "..", "templates", "default")
     end
 
     def parts
-      @parts
+      @parts ||= parse
     end
 
     private
 
-    def parse(template)
+    def parse
       Dir.chdir(template) do
         Hash[create_parts]
       end
     end
 
     def create_parts
-      Dir[SEARCH_PATTERN].
+      Dir[FILES_PATTERN].
         delete_if { |file| File.directory?(file) }.
         map { |file| create_part(file) }
     end

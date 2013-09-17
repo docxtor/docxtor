@@ -26,10 +26,10 @@ end
 
 RSpec.configure do |config|
   config.before(:all) do
-    Dir.mkdir(Docxtor2::Known::Path::TMP, 0700)
+    Dir.mkdir(File.join(File.dirname(__FILE__), "docxtor2", "tmp"), 0700)
   end
 
   config.after(:all) do
-    FileUtils.rm_rf(Docxtor2::Known::Path::TMP)
+    FileUtils.rm_rf(File.join(File.dirname(__FILE__), "docxtor2", "tmp"))
   end
 end
