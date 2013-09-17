@@ -14,6 +14,7 @@ module Docxtor2
       def initialize(*args, &block)
         @elements = []
 
+        # FIXME You have to call #create_params in this hook
         after_initialize(*args)
 
         instance_eval &block if block_given?
