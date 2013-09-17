@@ -7,7 +7,7 @@ module Docxtor2
 
       it 'finds exact count of template files' do
         expected = Dir.chdir(template) {
-          Dir[SEARCH_PATTERN].
+          Dir[TemplateParser::FILES_PATTERN].
           delete_if { |file| File.directory?(file) }.
           length
         }

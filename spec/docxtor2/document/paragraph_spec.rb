@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 module Docxtor2
-  describe Package::Document::Paragraph do
+  describe Document::Paragraph do
   	include_context 'xmlbuilder' do
 
       subject {
-        render(Package::Document::Paragraph, "text1", :b => true) do
+        render(Document::Paragraph, "text1", :b => true) do
           style 123
           spacing :before => 80, :after => 240
           font_size 32
