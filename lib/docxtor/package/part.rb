@@ -1,4 +1,4 @@
-module Docxtor2
+module Docxtor
   module Package
     class Part
       attr_reader :filename, :content

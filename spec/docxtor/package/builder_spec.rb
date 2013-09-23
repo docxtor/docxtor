@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Docxtor2
+module Docxtor
   describe Package::Builder do
     subject { Package::Builder.new({}, Package::Part.new("word/document.xml", 'content')) }
 

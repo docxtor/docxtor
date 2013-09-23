@@ -1,10 +1,10 @@
-docxtor2
+docxtor
 ========
 
-[![Build Status](https://travis-ci.org/vyorkin/docxtor2.png?branch=master)](https://travis-ci.org/vyorkin/docxtor2)
-[![Coverage Status](https://coveralls.io/repos/vyorkin/docxtor2/badge.png)](https://coveralls.io/r/vyorkin/docxtor2)
-[![Dependency Status](https://gemnasium.com/vyorkin/docxtor2.png)](https://gemnasium.com/vyorkin/docxtor2)
-[![Gem Version](http://stillmaintained.com/vyorkin/docxtor2.png)](http://stillmaintained.com/vyorkin/docxtor2)
+[![Build Status](https://travis-ci.org/vyorkin/docxtor.png?branch=master)](https://travis-ci.org/vyorkin/docxtor)
+[![Coverage Status](https://coveralls.io/repos/vyorkin/docxtor/badge.png)](https://coveralls.io/r/vyorkin/docxtor)
+[![Dependency Status](https://gemnasium.com/vyorkin/docxtor.png)](https://gemnasium.com/vyorkin/docxtor)
+[![Gem Version](http://stillmaintained.com/vyorkin/docxtor.png)](http://stillmaintained.com/vyorkin/docxtor)
 
 ## Summary
 
@@ -22,7 +22,7 @@ More to come, stay tuned!
 
 Add this line to your application's Gemfile:
 
-    gem 'docxtor2'
+    gem 'docxtor'
 
 And then execute:
 
@@ -30,12 +30,12 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install 'docxtor2'
+    $ gem install 'docxtor'
 
 ## Usage
 
 ```
-package = Docxtor2.generate do
+package = Docxtor.generate do
   table_of_contents "Contents"
   h 1, "heading1"
 
@@ -76,7 +76,7 @@ more usage examples:
 # Somewhere in your controller:
 
 def action_method
-  @stream = Docxtor2.generate do
+  @stream = Docxtor.generate do
     p 'Paragraph text', :align => 'center', :b => true
     table_of_contents 'Table of contents'
     page_break

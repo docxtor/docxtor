@@ -1,4 +1,4 @@
-module Docxtor2
+module Docxtor
   module Document
     class Heading < Paragraph
       H1 = 1

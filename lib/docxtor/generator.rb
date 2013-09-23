@@ -1,4 +1,4 @@
-module Docxtor2
+module Docxtor
   class Generator
     class << self
       def generate(template, &block)

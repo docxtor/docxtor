@@ -1,4 +1,4 @@
-module Docxtor2
+module Docxtor
   class TemplateParser
     attr_accessor :template
 

@@ -1,4 +1,4 @@
-module Docxtor2
+module Docxtor
   module Document
     class TableOfContents < Element
       STYLE = 'defprnRUSSelStyle'

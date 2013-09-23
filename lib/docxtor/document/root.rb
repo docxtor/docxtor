@@ -1,4 +1,4 @@
-module Docxtor2
+module Docxtor
   module Document
     class Root < Element
       map({ :table_of_contents  => Document::TableOfContents,

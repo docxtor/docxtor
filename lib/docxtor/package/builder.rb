@@ -1,4 +1,4 @@
-module Docxtor2
+module Docxtor
   module Package
     class Builder
       attr_reader :parts

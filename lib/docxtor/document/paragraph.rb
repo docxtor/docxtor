@@ -1,4 +1,4 @@
-module Docxtor2
+module Docxtor
   module Document
     class Paragraph < Element
       STYLE = 'a5'

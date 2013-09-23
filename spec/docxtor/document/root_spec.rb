@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Docxtor2
+module Docxtor
   describe Document::Root do
     include_context "xmlbuilder" do
 
@@ -12,9 +12,9 @@ module Docxtor2
         end
       }
 
-	    it 'appends element to elements' do
-	  		subject.elements.first.should be_instance_of Docxtor2::Document::Paragraph
-	  	end
-		end
+      it 'appends element to elements' do
+        subject.elements.first.should be_instance_of Docxtor::Document::Paragraph
+      end
+    end
   end
 end

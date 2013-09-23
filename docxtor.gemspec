@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'docxtor2/version'
+require 'docxtor/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "docxtor2"
-  spec.version       = Docxtor2::VERSION
-  spec.authors       = ["Vasiliy Yorkin"]
-  spec.email         = ["vasiliy.yorin@gmail.com"]
+  spec.name          = "docxtor"
+  spec.version       = Docxtor::VERSION
+  spec.authors       = ["Irina Bednova, Vasiliy Yorkin"]
+  spec.email         = ["howeveririna@gmail.com, vasiliy.yorkin@gmail.com"]
   spec.description   = %q{Ruby docx generator, provides simple DSL for building word documents}
   spec.summary       = %q{Ruby docx generator}
-  spec.homepage      = "http://github.com/vyorkin/docxtor2"
+  spec.homepage      = "http://github.com/docxtor/docxtor"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

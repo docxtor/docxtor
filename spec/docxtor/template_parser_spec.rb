@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Docxtor2
+module Docxtor
   describe TemplateParser do
     include_context 'integration' do
       subject { TemplateParser.new(template) }

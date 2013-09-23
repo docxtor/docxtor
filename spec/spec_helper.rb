@@ -11,7 +11,7 @@ Wrong.config.alias_assert :expect, :override => true
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
-require 'docxtor2'
+require 'docxtor'
 
 if ENV["TRAVIS"]
   require 'coveralls'
@@ -20,16 +20,16 @@ end
 
 ['matchers', 'contexts', 'examples'].each do |dir|
   dir_pattern = File.join(File.dirname(__FILE__),
-    'docxtor2', 'support', dir, '**', '*.rb')
+    'docxtor', 'support', dir, '**', '*.rb')
   Dir[File.expand_path(dir_pattern)].each { |f| require f }
 end
 
 RSpec.configure do |config|
   config.before(:all) do
-    Dir.mkdir(File.join(File.dirname(__FILE__), "docxtor2", "tmp"), 0700)
+    Dir.mkdir(File.join(File.dirname(__FILE__), "docxtor", "tmp"), 0700)
   end
 
   config.after(:all) do
-    FileUtils.rm_rf(File.join(File.dirname(__FILE__), "docxtor2", "tmp"))
+    FileUtils.rm_rf(File.join(File.dirname(__FILE__), "docxtor", "tmp"))
   end
 end
