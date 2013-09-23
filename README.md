@@ -1,10 +1,10 @@
 docxtor
 ========
 
-[![Build Status](https://travis-ci.org/vyorkin/docxtor.png?branch=master)](https://travis-ci.org/vyorkin/docxtor)
-[![Coverage Status](https://coveralls.io/repos/vyorkin/docxtor/badge.png)](https://coveralls.io/r/vyorkin/docxtor)
-[![Dependency Status](https://gemnasium.com/vyorkin/docxtor.png)](https://gemnasium.com/vyorkin/docxtor)
-[![Gem Version](http://stillmaintained.com/vyorkin/docxtor.png)](http://stillmaintained.com/vyorkin/docxtor)
+[![Build Status](https://travis-ci.org/docxtor/docxtor.png?branch=master)](https://travis-ci.org/docxtor/docxtor)
+[![Coverage Status](https://coveralls.io/repos/vyorkin/docxtor/badge.png)](https://coveralls.io/r/docxtor/docxtor)
+[![Dependency Status](https://gemnasium.com/vyorkin/docxtor.png)](https://gemnasium.com/docxtor/docxtor)
+[![Gem Version](http://stillmaintained.com/vyorkin/docxtor.png)](http://stillmaintained.com/docxtor/docxtor)
 
 ## Summary
 
