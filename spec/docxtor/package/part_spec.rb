@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Docxtor2
+module Docxtor
   describe Package::Part do
     context "given filename and content" do
       subject { Package::Part.new("filename", "content") }

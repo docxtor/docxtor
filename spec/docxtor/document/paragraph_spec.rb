@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-module Docxtor2
+module Docxtor
   describe Document::Paragraph do
-  	include_context 'xmlbuilder' do
+    include_context 'xmlbuilder' do
 
       subject {
         render(Document::Paragraph, "text1", :b => true) do
@@ -38,7 +38,7 @@ module Docxtor2
       end
 
       context 'nested run' do
-      	it 'is bold' do
+        it 'is bold' do
           subject.should contain_element_property(:r, :b)
         end
 
@@ -49,8 +49,8 @@ module Docxtor2
         it 'is underlined' do
           subject.should contain_element_property(:r, :u)
         end
-    	end
+      end
 
-  	end
+    end
   end
 end

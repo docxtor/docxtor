@@ -1,4 +1,4 @@
-module Docxtor2
+module Docxtor
   shared_context 'xmlbuilder' do
     include WordprocessingMLMatchers
 

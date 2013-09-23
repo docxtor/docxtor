@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-module Docxtor2
+module Docxtor
   describe Document::TableOfContents do
-		include_context 'xmlbuilder' do
+    include_context 'xmlbuilder' do
 
       subject { render(Document::TableOfContents, 'Contents') }
 
