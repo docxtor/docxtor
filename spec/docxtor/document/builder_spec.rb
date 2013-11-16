@@ -10,7 +10,7 @@ module Docxtor
     }
 
     it 'contains body' do
-      subject.content.should contain_body
+      expect { subject contain_body }
     end
   end
 end

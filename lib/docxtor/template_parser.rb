@@ -4,19 +4,13 @@ module Docxtor
 
     FILES_PATTERN = File.join('**', '{*,.}{xml,rels}')
 
-    def initialize(template)
+    def initialize(template = nil)
       @template = template || File.join(File.dirname(__FILE__), "..", "..", "templates", "default")
     end
 
     def parts
-      @parts ||= parse
-    end
-
-    private
-
-    def parse
       Dir.chdir(template) do
-        Hash[create_parts]
+        create_parts
       end
     end
 
@@ -29,9 +23,8 @@ module Docxtor
     def create_part(file)
       content = File.read(file)
       part = Package::Part.new(file, content)
-      key = File.basename(file, '.xml')
 
-      [key, part]
+      part
     end
 
   end
