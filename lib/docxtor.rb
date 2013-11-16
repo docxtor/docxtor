@@ -6,6 +6,9 @@ require "docxtor/version"
 module Docxtor
   autoload :Generator, 'docxtor/generator'
   autoload :TemplateParser, 'docxtor/template_parser'
+  autoload :RunningElementsBuilder, 'docxtor/running_elements_builder'
+  autoload :RunningElement, 'docxtor/running_element'
+  autoload :ReferenceBuilder, 'docxtor/reference_builder'
 
   module Document
     autoload :Builder, 'docxtor/document/builder'

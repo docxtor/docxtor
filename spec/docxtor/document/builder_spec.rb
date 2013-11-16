@@ -4,7 +4,7 @@ module Docxtor
   describe Document::Builder do
     include WordprocessingMLMatchers
 
-    subject { Document::Builder.new do
+    subject { Document::Builder.new [] do
       p "Hi"
       end
     }

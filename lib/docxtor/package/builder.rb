@@ -3,9 +3,8 @@ module Docxtor
     class Builder
       attr_reader :parts
 
-      def initialize(parts, document)
+      def initialize(parts)
         @parts = parts
-        @parts['document'] = Part.new("word/document.xml", document.content)
       end
 
       def save(filepath)
@@ -25,7 +24,7 @@ module Docxtor
       private
 
       def write_parts(ostream)
-        @parts.each do |name, part|
+        @parts.each do |part|
           ostream.put_next_entry(part.filename)
           ostream.puts part.content
         end

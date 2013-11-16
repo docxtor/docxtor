@@ -9,6 +9,10 @@ module WordprocessingMLMatchers
 		exist_xpath('//w:document/w:body')
 	end
 
+  def contain_element(el)
+    exist_xpath('//w:#{el}')
+  end
+
 	def contain_paragraph_text
 		exist_xpath('//w:p/w:r/w:t')
 	end

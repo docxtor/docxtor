@@ -11,6 +11,10 @@ module Docxtor
         end
       end
 
+      def method_missing name, *args
+        super unless [:header, :footer].include? name
+      end
+
       def initialize(*args, &block)
         @elements = []
 
