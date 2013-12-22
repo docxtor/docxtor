@@ -19,9 +19,11 @@ module Docxtor
         elements.each do |element|
           xml.Relationship "Id" => element.reference_id,
                            "Target" => element.name,
-                           "type" => element.reference_type
+                           "Type" => element.reference_type
         end
       end
+
+      xml.target!
     end
   end
 end

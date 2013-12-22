@@ -26,7 +26,7 @@ module Docxtor
         "xmlns:w" => "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
         "xmlns:wne" => "http://schemas.microsoft.com/office/word/2006/wordml" do
           xml.w :body do
-            xml << Document::Root.new(&block).render(xml)
+            xml << Document::Root.new(&block).render(::Builder::XmlMarkup.new)
 
             render_running_elements xml
           end
@@ -38,7 +38,7 @@ module Docxtor
       def render_running_elements xml
         xml.w :sectPr do |xml|
           running_elements.each do |re|
-            xml.w re.reference_name, "r:id" => re.reference_id, "w:type" => "#{re.pages}"
+            xml.w re.reference_name.to_sym, "r:id" => re.reference_id, "w:type" => "#{re.pages}"
           end
         end
       end
