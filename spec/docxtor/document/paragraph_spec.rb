@@ -18,36 +18,36 @@ module Docxtor
       }
 
       it 'contains reference to style' do
-        subject.should contain_element_style(:p)
+        expect { subject.include? "w:pStyle" }
       end
 
       it 'contains spacing property' do
-        subject.should contain_element_property(:p, :spacing)
+        expect { subject.include? "w:spacing" }
       end
 
       it 'contains font size property' do
-        subject.should contain_element_property(:p, :sz)
+        expect { subject.include? "w:sz" }
       end
 
       it 'contains complex font size property' do
-        subject.should contain_element_property(:p, :szCs)
+        expect { subject.include? "w:szCs" }
       end
 
       it 'contains indentiation property' do
-        subject.should contain_element_property(:p, :ind)
+        expect { subject.include? "w:ind" }
       end
 
       context 'nested run' do
         it 'is bold' do
-          subject.should contain_element_property(:r, :b)
+          expect { subject.include? "<w:b/>" }
         end
 
         it 'is italic' do
-          subject.should contain_element_property(:r, :i)
+          expect { subject.include? "<w:i/>" }
         end
 
         it 'is underlined' do
-          subject.should contain_element_property(:r, :u)
+          expect { subject.include? "<w:u/>" }
         end
       end
 

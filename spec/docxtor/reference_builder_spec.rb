@@ -2,8 +2,6 @@ require 'spec_helper'
 
 module Docxtor
   describe ReferenceBuilder do
-    include WordprocessingMLMatchers
-
     let(:element) { double("Document::RunningElement") }
 
     subject { ReferenceBuilder.new([element]) }
@@ -21,7 +19,7 @@ module Docxtor
 
     it "renders xml with element's reference info" do
       expect {
-        subject contain_element("Relationship")
+        subject.content.include?("Relationship")
         subject.content.include?("header1.xml")
       }
     end

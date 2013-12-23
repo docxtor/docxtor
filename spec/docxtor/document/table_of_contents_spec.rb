@@ -7,11 +7,7 @@ module Docxtor
       subject { render(Document::TableOfContents, 'Contents') }
 
       it 'contains gallery of document parts' do
-        subject.should contain_gallery_of_document_parts
-      end
-
-      it 'contains heading text' do
-        subject.should contain_sdt_content_heading
+        expect { subject.include? "docPartGallery" }
       end
     end
   end

@@ -1,3 +1,4 @@
+require 'tempfile'
 require 'spec_helper'
 
 module Docxtor
@@ -41,17 +42,22 @@ module Docxtor
 
       context 'after serialization' do
         before do
-          @string_io = subject.to_stream
-          istream = Zip::ZipInputStream.open_buffer(@string_io)
+          @tempfile = Tempfile.new("test.docx")
+          subject.save(@tempfile.path)
+          zip_input_stream = Zip::ZipInputStream.open(@tempfile.path)
 
-          while (entry = istream.get_next_entry)
+          while (entry = zip_input_stream.get_next_entry)
             @document_entry = entry if entry.name == "word/document.xml"
             @header_entry = entry if entry.name = "word/header1.xml"
           end
         end
 
+        after do
+          @tempfile.unlink
+        end
+
         it 'contains data' do
-          expect { @string_io.size > 0 }
+          expect { @tempfile.size > 0 }
         end
 
         it 'contains document part' do

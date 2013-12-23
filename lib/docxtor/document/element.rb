@@ -86,8 +86,11 @@ module Docxtor
       def get_properties_for(el)
         props = properties[el]
         if props
-          pairs = @params.
-            map { |k, v| props[k] && [props[k][:name] || props[k], v] }
+          pairs = @params.map do |k, v|
+            unless props[k].nil?
+              props[k].is_a?(Hash) ? [props[k][:name], v] : [props[k], v]
+            end
+          end
           Hash[pairs]
         end
       end

@@ -2,8 +2,6 @@ require 'spec_helper'
 
 module Docxtor
   describe RunningElement do
-    include WordprocessingMLMatchers
-
     subject { RunningElement.new :footer, 1, :pagenum, {:pages => "odd"} }
 
     it "can have referenve_id assigned to it" do
@@ -31,7 +29,7 @@ module Docxtor
     describe "#content" do
       it "returns xml with correct contents markup" do
         expect {
-          subject contain_element(:instrText)
+          subject.content.include? "instrText"
           subject.content.include? "PAGE"
         }
       end
