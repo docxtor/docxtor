@@ -13,14 +13,6 @@ module Docxtor
         end
       end
 
-      def to_stream
-        ostream = Zip::ZipOutputStream.new("streamed", true)
-        write_parts(ostream)
-        string_io = ostream.close_buffer
-        string_io.rewind
-        string_io
-      end
-
       private
 
       def write_parts(ostream)
