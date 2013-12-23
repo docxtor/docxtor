@@ -9,12 +9,14 @@ docxtor
 ## Summary
 
 Ruby docx generator.
-Supported ruby versions: ree-1.8.7, mri 1.8.7
+**Docxtor** is built to work with Ruby 1.8 as well as 1.9
 
 ## Features
 
-1. Paragraphs and headings: bold, italic, custom style id, line breaks, page breaks, spacing
-2. Table of contents
+- Paragraphs and headings markup.
+- Bold, underline & italic font styles.
+- Document table of contents.
+- Document headers & footers, page numbers.
 
 More to come, stay tuned!
 
@@ -34,7 +36,9 @@ Or install it yourself as:
 
 ## Usage
 
-```
+Here's the taste of what **Docxtor's** "markup language" may look like.
+
+```ruby
 package = Docxtor.generate do
   table_of_contents "Contents"
   h 1, "heading1"
@@ -63,50 +67,90 @@ end
 package.save('test.docx')
 ```
 
-more usage examples:
+### Entry point
 
-```
-# Usage sample:
-# elements - any collection of your elements, so in this example i have:
-# class Element
-#   attr_reader :title1, :title2, :content
-# end
-# elements = Array.new(5, Element)
-
-# Somewhere in your controller:
-
-def action_method
-  @stream = Docxtor.generate do
-    p 'Paragraph text', :align => 'center', :b => true
-    table_of_contents 'Table of contents'
-    page_break
-    
-    elements.each do |el|
-      h 1, el.title do
-        spacing :before => 120, :after => 120
-  
-        write el.title1
-        write ", blahblah "
-        br
-        write el.title2
-      end
-  
-      p do
-        el.content.lines.map(&:chomp).each do |line|
-          write line; br
-        end
-      end
-      
-    end
-  end
-  
-  send_data(
-    @stream.read,
-    :filename => 'yourfilename.docx',
-    :type =>'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-  )
+```ruby
+Docxtor.generate do
+  ...
 end
 ```
+
+### Paragraphs
+
+The main building block of `docx` document is a paragraph. There're couple of ways of defining a paragraph.
+
+```ruby
+p "Hi there!", :bold => true
+```
+
+Is the same as
+
+```ruby
+p do
+  w "Hi there!"
+  b
+end
+```
+
+or
+
+```ruby
+p do
+  write "Hi there!"
+  bold
+end
+```
+
+Everything styling-related that is written either inside the block or in options hash will be applied to the whole parapraph.
+
+You can mix and match different ways to define text & options.
+
+```ruby
+p "I'm a first string in this paragraph", :bold => true do
+  write "I'm a second one."
+  u
+  w "And we all will be bold and underlined in the same time!"
+end
+```
+
+### Headings
+
+**Currently not working as expected! Will be fixed soon!**
+
+Generally the same as paragraphs, but have additional argument - the level of heading and styled by default.
+
+```ruby
+  h 1, "Chapter 1"
+  h 2, "Where our hero goes for an adventure"
+```
+
+### Table of Contents
+
+**Currently not working as expected! Will be fixed soon!**
+
+Inserts the ToC for a document with a caption.
+
+```ruby
+table_of_contents "Table of Contents"
+```
+
+### Footers & Headers
+
+You can specify following properties for footers and headers:
+
+- on which pages footer or header will appear (`:odd`, `:even` or only `:first`);
+- alignment (`:center`, `:left`, `:right`)
+- contents of a footer/header, including special keyword `:pagenum` which inserts page numbers
+
+```ruby
+footer :pagenum, :align => :center
+header "Proudly made by me", :pages => :odd
+footer "2013", :pages => :first, :align => :right
+```
+
+### Breaks
+
+You can insert `page_break` or newline inside a paragraph with `br`.
 
 ## Contributing
 
